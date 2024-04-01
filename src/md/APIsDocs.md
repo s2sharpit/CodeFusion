@@ -77,7 +77,7 @@ The API requires authentication using the OAuth 2.0 protocol. Users need to obta
 
 ### User Schema
 
-````json
+```json
 {
   "User": {
     "Name": "string",
@@ -88,10 +88,11 @@ The API requires authentication using the OAuth 2.0 protocol. Users need to obta
     "Interests": ["string"]
   }
 }
-````
+```
 
 ### Project Schema
-````json
+
+```json
 {
   "Project": {
     "Title": "string",
@@ -100,19 +101,20 @@ The API requires authentication using the OAuth 2.0 protocol. Users need to obta
     "Images": ["string"],
     "Categories": ["string"],
     "TechnologyStack": ["string"],
+    "Likes": ["string"],
     "Collaborators": [
       {
         "UserID": "string",
         "Role": "string"
       }
-    ],
-    "Likes": ["string"]
+    ]
   }
 }
-````
+```
 
 ### Collaboration Request Schema
-````json
+
+```json
 {
   "CollaborationRequest": {
     "SenderUserID": "string",
@@ -121,4 +123,4 @@ The API requires authentication using the OAuth 2.0 protocol. Users need to obta
     "Details": "string"
   }
 }
-````
+```
