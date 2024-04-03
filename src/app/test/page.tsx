@@ -1,52 +1,23 @@
-import { auth } from "@/lib/auth";
 import Image from "next/image";
+import { auth } from "@/lib/auth";
 
-export default async function page() {
-  try {
-    const session = await auth();
-    const request = await fetch(
-      "https://api.github.com/repos/s2sharpit/krishi-bazaar/collaborators",
-      {
-        headers: {
-          Authorization: `token ${session?.user.accessToken}`,
-        },
-      }
-    );
-
-    if (!request.ok) {
-      throw new Error("Failed to fetch data from GitHub API");
-    }
-
-    const data = await request.json();
-    const headers = request.headers;
-    const remaining = headers.get("x-ratelimit-remaining");
-    const limit = headers.get("x-ratelimit-limit");
-
-    return (
-      <main className="flex gap-20 flex-col items-center justify-between p-24">
-        {JSON.stringify(session, null, 2)}
-        <p>
-          {remaining}, {limit}
-        </p>
-        <div className="flex flex-wrap gap-20">
-          {data.map((user: any) => (
-            <div key={user?.id}>
-              <Image
-                src={user.avatar_url}
-                alt={user.login}
-                width={100}
-                height={100}
-                className="rounded-full"
-              />
-              <p>{user.login}</p>
-              <p>{user.name}</p>
-            </div>
-          ))}
-        </div>
-      </main>
-    );
-  } catch (error) {
-    console.error("An error occurred:", error);
-    return <div>An error occurred while fetching data.</div>;
-  }
+export default async function Home() {
+  const session = await auth();
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <div className="flex flex-col items-center justify-center">
+        <h1 className="font-bold text-3xl text-green-600 pb-4">Home</h1>
+        <Image
+          className="border border-green-500 rounded-full"
+          src={session?.user.image as string}
+          alt={session?.user.username as string}
+          width={200}
+          height={200}
+        />
+        <h1>{session?.user.username}</h1>
+        <p>{session?.user.name}</p>
+        <p>{session?.user.location}</p>
+      </div>
+    </main>
+  );
 }
