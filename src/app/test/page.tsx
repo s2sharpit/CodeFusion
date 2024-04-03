@@ -1,22 +1,23 @@
+import Image from "next/image";
 import { auth } from "@/lib/auth";
 
 export default async function Home() {
   const session = await auth();
-  const request = await fetch(
-    "https://api.github.com/repos/s2sharpit/s2sharpit/contributors"
-  );
-  const data = await request.json();
-  const headers = request.headers;
-  const remaining = headers.get("x-ratelimit-remaining");
-  const limit = headers.get("x-ratelimit-limit");
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {JSON.stringify(session, null, 2)}
-      <p>
-        {remaining}, {limit}
-      </p>
-      <p>{JSON.stringify(headers)}</p>
-      {/* <p>{JSON.stringify(data)}</p> */}
+      <div className="flex flex-col items-center justify-center">
+        <h1 className="font-bold text-3xl text-green-600 pb-4">Home</h1>
+        <Image
+          className="border border-green-500 rounded-full"
+          src={session?.user.image as string}
+          alt={session?.user.username as string}
+          width={200}
+          height={200}
+        />
+        <h1>{session?.user.username}</h1>
+        <p>{session?.user.name}</p>
+        <p>{session?.user.location}</p>
+      </div>
     </main>
   );
 }
