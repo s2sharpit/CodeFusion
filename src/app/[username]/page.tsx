@@ -6,7 +6,7 @@ export default async function page({
 }: {
   params: { username: string };
 }) {
-  const res = await fetch(`${process.env.AUTH_URL}/api/devs`);
+  const res = await fetch(`${process.env.AUTH_URL}/api/devs`, {next: {tags: ["devs"]}});
   const data = await res.json();
   const user = data.find((dev: any) => dev.username === params.username);
   if (!user) {

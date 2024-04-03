@@ -2,6 +2,7 @@ import NextAuth, { Session, signIn } from "next-auth";
 import GitHub from "next-auth/providers/github";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/lib/db";
+import { revalidateTag } from "next/cache";
 
 export const {
   handlers: { GET, POST },
@@ -29,7 +30,8 @@ export const {
     async signIn({ user, profile }) {
       if (user && profile) {
         (user as signIn["user"]).username = profile.login as string;
-      }      
+      }
+      revalidateTag('devs');
       return true;
     },
     //     async redirect({ url, baseUrl }) {
