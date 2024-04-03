@@ -10,7 +10,7 @@ declare module "next-auth" {
     user: {
       /** The user's postal address. */
       username?: string;
-      id: number;
+      id: string;
       bio?: string;
       location?: string;
       twitter_username?: string;

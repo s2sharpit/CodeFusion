@@ -43,13 +43,14 @@ export const {
 
       if (account) {
         (token.user as Session["user"]).accessToken = account.access_token as string;
+        (token.user as Session["user"]).id = user.id as string;
       }
 
       if (profile) {
-        const { id, login: username, bio, location, twitter_username, } = profile;
-        token.user = { ...(token.user as Session["user"]), id, username, bio, location, twitter_username };
+        const { login: username, bio, location, twitter_username, } = profile;
+        token.user = { ...(token.user as Session["user"]), username, bio, location, twitter_username };
       }
-
+      
       return token;
     },
     async session({ session, token }) {
