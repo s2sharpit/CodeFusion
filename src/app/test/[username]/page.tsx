@@ -5,7 +5,7 @@ export default async function page({
 }: {
   params: { username: string };
 }) {
-  const res = await fetch(`${process.env.URL}/api/test/${params.username}`, {
+  const res = await fetch(`${process.env.AUTH_URL}/api/test/${params.username}`, {
     cache: "no-store",
   });
   const data = await res.json();
