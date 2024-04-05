@@ -57,7 +57,7 @@ export const {
     },
     async session({ session, token }) {
       session.user = { ...session.user, ...(token.user as Session) };
-      revalidateTag("devs");
+      revalidateTag("users");
       return session;
     },
   },

@@ -5,6 +5,7 @@ export default async function page() {
   const session = await auth();
   const request = await fetch(
     "https://api.github.com/repos/s2sharpit/krishi-bazaar/collaborators",
+    // cache: "no-store",
     {
       headers: {
         Authorization: `token ${session?.user.accessToken}`,
