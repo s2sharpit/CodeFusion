@@ -3,6 +3,7 @@ export async function GET(
   { params }: { params: { username: string } }
 ) {
   const res = await fetch(`${process.env.AUTH_URL}/api/devs`);
+  
   if (!res.ok) {
     return new Response(res.statusText, { status: res.status });
   }

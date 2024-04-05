@@ -12,10 +12,6 @@ export default async function page() {
     }
   );
 
-  if (!request.ok) {
-    throw new Error("Failed to fetch data from GitHub API");
-  }
-
   const data = await request.json();
   const headers = request.headers;
   const remaining = headers.get("x-ratelimit-remaining");
