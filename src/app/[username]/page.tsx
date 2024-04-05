@@ -16,19 +16,19 @@ export default async function page({
   return (
     <div>
       <h1 className="text-red-500 pt-6 text-3xl">From API</h1>
-      <h1>{user?.username}</h1>
-      <p>{user?.name}</p>
-      <p>{user?.id}</p>
-      <p>{user?.email}</p>
-      <p>{user?.major}</p>
-      <p>{user?.interests}</p>
-      <Image
-        className="border border-green-500 rounded-full"
-        src={user?.image as string}
-        alt={user?.username}
-        width={200}
-        height={200}
-      />
+      <div className="p-4 border border-blue-500 rounded-md">
+        <h1>{user?.username}</h1>
+        <p>{user?.name}</p>
+        <p>{user?.major}</p>
+        <p>{user?.interests}</p>
+        <Image
+          className="border border-green-500 rounded-full"
+          src={user?.image as string}
+          alt={user?.username}
+          width={200}
+          height={200}
+        />
+      </div>
     </div>
   );
 }
