@@ -1,3 +1,4 @@
+import { getUsers } from "@/lib/getData";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
@@ -6,9 +7,8 @@ export default async function page({
 }: {
   params: { username: string };
 }) {
-  const res = await fetch(`${process.env.AUTH_URL}/api/devs`, {next: {tags: ["devs"]}});
-  const data = await res.json();
-  const user = data.find((dev: any) => dev.username === params.username);
+  const users = await getUsers();
+  const user = users.find(dev => dev.username === params.username);
   if (!user) {
     notFound();
   }
@@ -24,7 +24,7 @@ export default async function page({
       <p>{user?.interests}</p>
       <Image
         className="border border-green-500 rounded-full"
-        src={user?.image}
+        src={user?.image as string}
         alt={user?.username}
         width={200}
         height={200}
