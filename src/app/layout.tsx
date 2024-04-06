@@ -21,10 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-zinc-950 text-zinc-400`}>
+      <body className={`${inter.className} bg-black text-zinc-400`}>
         <Header />
         {children}
-          <Footer />
+        <Footer />
       </body>
     </html>
   );

@@ -1,5 +1,5 @@
 import { unstable_cache } from "next/cache";
-import prisma from "./db";
+import prisma from "@/lib/db";
 
 export const getUsers = unstable_cache(
   async () => {

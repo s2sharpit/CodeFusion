@@ -1,4 +1,4 @@
-import NextAuth, { Session, signIn } from "next-auth";
+import NextAuth, { Session } from "next-auth";
 import GitHub from "next-auth/providers/github";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/lib/db";
@@ -7,6 +7,8 @@ import { revalidateTag } from "next/cache";
 export const {
   handlers: { GET, POST },
   auth,
+  signIn,
+  signOut,
 } = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
@@ -29,7 +31,7 @@ export const {
   callbacks: {
     async signIn({ user, profile }) {
       if (user && profile) {
-        (user as signIn["user"]).username = profile.login as string;
+        (user as Session["user"]).username = profile.login as string;
       }
       return true;
     },
