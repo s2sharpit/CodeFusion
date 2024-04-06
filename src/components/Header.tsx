@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Navbar from "./Navbar";
-import { auth, signIn, signOut } from "@/lib/auth";
+import { auth, signIn } from "@/lib/auth";
 import { FaGithub } from "react-icons/fa6";
-import Image from "next/image";
+import { ProfileSignout } from "./Client";
 
 function SignIn() {
   return (
@@ -22,20 +22,6 @@ function SignIn() {
   );
 }
 
-function SignOut({ children }: { children: React.ReactNode }) {
-  return (
-    <form
-      action={async () => {
-        "use server";
-        await signOut();
-      }}
-    >
-      <p>{children}</p>
-      <button type="submit">Sign out</button>
-    </form>
-  );
-}
-
 export default async function Header() {
   const session = await auth();
   const user = session?.user;
@@ -46,26 +32,8 @@ export default async function Header() {
       </Link>
       <div className="flex items-center gap-5">
         <Navbar />
-        <span>
-          {user ? (
-            <Link href={`/${user?.username}`}>
-              <Image
-                className="rounded-full max-h-min h-10 w-10 border border-gray-600"
-                src={user?.image as string}
-                alt={user?.username}
-                width={80}
-                height={80}
-              />
-            </Link>
-          ) : (
-            <SignIn />
-          )}
-        </span>
+        <span>{user ? <ProfileSignout user={user} /> : <SignIn />}</span>
       </div>
     </header>
   );
-}
-
-{
-  /* <SignOut>{`Welcome ${user.username}`}</SignOut> */
 }

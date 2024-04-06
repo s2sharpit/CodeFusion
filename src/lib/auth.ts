@@ -1,8 +1,8 @@
 import NextAuth, { Session } from "next-auth";
-import GitHub from "next-auth/providers/github";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/lib/db";
 import { revalidateTag } from "next/cache";
+import authConfig from "./auth.config";
 
 export const {
   handlers: { GET, POST },
@@ -12,18 +12,8 @@ export const {
 } = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
-  providers: [
-    GitHub({
-      clientId: process.env.GITHUB_ID as string,
-      clientSecret: process.env.GITHUB_SECRET as string,
-      authorization: {
-        params: {
-          // I wish to request additional permission scopes.
-          scope: "public_repo read:user user:email",
-        },
-      },
-    }),
-  ],
+  ...authConfig,
+
   //   pages: {
   //     signIn: "/sign-in", // This is frontend route
   //   },
@@ -52,7 +42,13 @@ export const {
 
       if (profile) {
         const { login: username, bio, location, twitter_username } = profile;
-        token.user = { ...(token.user as Session["user"]), username, bio, location, twitter_username, };
+        token.user = {
+          ...(token.user as Session["user"]),
+          username,
+          bio,
+          location,
+          twitter_username,
+        };
       }
 
       return token;
