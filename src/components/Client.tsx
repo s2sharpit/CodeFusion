@@ -19,7 +19,7 @@ export function ProfileSignout({ user }: { user: Session["user"] }) {
           Sign out
         </button>
       ) : (
-        <Link href={`/s2sharpit`}>
+        <Link href={`/${user?.username}`}>
           <Image
             className="rounded-full max-h-min h-10 w-10 border border-gray-600"
             src={user?.image as string}
