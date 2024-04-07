@@ -8,10 +8,14 @@ import { forwardRef, HTMLAttributes } from "react";
 interface DivProps extends HTMLAttributes<HTMLDivElement> {}
 
 const Navbar = forwardRef<HTMLDivElement, DivProps>(
-  ({ className, children }) => {
+  ({ className, children, ...props }, ref) => {
     const activePath = usePathname();
     return (
-      <div className={cn("flex items-center gap-5", className)}>
+      <div
+        className={cn("flex items-center gap-5", className)}
+        ref={ref}
+        {...props}
+      >
         {navData.map((navLink) => (
           <Link
             key={navLink.path}

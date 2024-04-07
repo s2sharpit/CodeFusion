@@ -18,7 +18,7 @@ export default async function Header() {
           {user ? <ProfileSignout user={user} /> : <SignIn />}
         </Navbar>
       </header>
-      <Navbar className="fixed md:hidden bottom-4 left-0 right-0 mx-auto text-white w-10/12 min-w-fit justify-evenly bg-transparent backdrop-blur-md border-gray-700 border p-2 xs:px-8 rounded-xl">
+      <Navbar className="fixed md:hidden bottom-4 left-0 right-0 mx-auto text-white w-11/12 min-w-fit justify-evenly bg-black/50 backdrop-blur-md border-gray-700 border p-4 xs:px-8 rounded-xl">
         {user ? <ProfileSignout user={user} /> : <SignIn />}
       </Navbar>
     </>
