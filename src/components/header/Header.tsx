@@ -11,7 +11,7 @@ export default async function Header() {
   return (
     <>
       <header className="flex justify-between md:justify-around p-5 w-full text-white top-0 z-10 sticky border-b border-gray-800 mx-auto bg-transparent backdrop-blur-sm">
-        <Link href="/" className="font-bold text-xl items-center flex">
+        <Link href="/" className="font-bold text-2xl items-center flex">
           Code<span className="text-primary">Fusion</span>
         </Link>
         <Navbar className="max-md:hidden">

@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
-import { navData } from "@/data/navData";
+import { navData } from "@/lib/navData";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/twCSS";
 import { forwardRef, HTMLAttributes } from "react";
 
 interface DivProps extends HTMLAttributes<HTMLDivElement> {}
