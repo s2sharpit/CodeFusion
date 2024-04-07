@@ -6,13 +6,15 @@ import { shuffle } from "@/utils/shuffle";
 
 export default async function Devs() {
   const users = await getUsers();
+  const shuffledUsers = shuffle(users);
+  
   return (
     <Section>
       <Title>
         Search for <span className="text-primary">skilled</span> Developers
       </Title>
       <Wrapper variant="flex">
-        {shuffle(users)?.map((dev) => (
+        {shuffledUsers.map((dev) => (
           <Link
             href={`/${dev?.username}`}
             key={dev?.username}
