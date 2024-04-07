@@ -7,6 +7,7 @@ import { ProfileSignout } from "../Client";
 export default async function Header() {
   const session = await auth();
   const user = session?.user;
+
   return (
     <>
       <header className="flex justify-between md:justify-around p-5 w-full text-white top-0 z-10 sticky border-b border-gray-800 mx-auto bg-transparent backdrop-blur-sm">
@@ -17,11 +18,9 @@ export default async function Header() {
           {user ? <ProfileSignout user={user} /> : <SignIn />}
         </Navbar>
       </header>
-      <div className="fixed md:hidden bottom-4 left-0 right-0 bg-transparent w-full mx-auto  text-white px-8">
-        <Navbar className=" w-full justify-evenly bg-transparent backdrop-blur-md border-gray-700 border p-4 rounded-xl">
-          {user ? <ProfileSignout user={user} /> : <SignIn />}
-        </Navbar>
-      </div>
+      <Navbar className="fixed md:hidden bottom-4 left-0 right-0 mx-auto text-white w-10/12 min-w-fit justify-evenly bg-transparent backdrop-blur-md border-gray-700 border p-2 xs:px-8 rounded-xl">
+        {user ? <ProfileSignout user={user} /> : <SignIn />}
+      </Navbar>
     </>
   );
 }
@@ -35,7 +34,7 @@ function SignIn() {
       }}
     >
       <button
-        className="flex items-center gap-2 py-2 px-3 rounded-md font-semibold bg-white hover:bg-gray-200 transition text-black"
+        className="flex max-md:flex-col items-center max-md:text-xs md:gap-2 pb-0.5 pt-1 md:py-2 px-3 rounded-md font-medium md:font-semibold bg-white hover:bg-gray-200 transition text-black"
         type="submit"
       >
         <FaGithub className="text-xl" /> Sign in

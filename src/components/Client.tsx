@@ -14,21 +14,25 @@ export function ProfileSignout({ user }: { user: Session["user"] }) {
     <>
       {`/${user?.username}` === path ? (
         <button
-          className="py-2 px-3 rounded-md transition border border-gray-700 hover:border-gray-500"
+          className="flex flex-col items-center pt-1 pb-0.5 md:py-2 px-3 rounded-md transition outline-dashed outline-1 outline-gray-700 hover:outline-gray-500 max-md:text-xs"
           onClick={() => signOut()}
         >
-          {/* <MdExitToApp /> */}
+          <MdExitToApp className="text-xl md:hidden" />
           Sign out
         </button>
       ) : (
-        <Link href={`/${user?.username}`}>
+        <Link
+          href={`/${user?.username}`}
+          className="flex flex-col items-center rounded-md"
+        >
           <Image
-            className="rounded-full max-h-min h-10 w-10 border border-gray-600"
+            className="rounded-full max-h-min h-5 w-5 md:h-10 md:w-10 border border-gray-600"
             src={user?.image as string}
             alt={user?.username as string}
             width={80}
             height={80}
           />
+          <span className="md:hidden text-sm">Profile</span>
         </Link>
       )}
     </>

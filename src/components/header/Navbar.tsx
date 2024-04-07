@@ -17,7 +17,7 @@ const Navbar = forwardRef<HTMLDivElement, DivProps>(
             key={navLink.path}
             href={navLink.path}
             className={cn(
-              "flex flex-col items-center md:py-2 md:px-3 text-center hover:text-primary rounded-lg max-md:text-sm",
+              "flex flex-col items-center py-0.5 md:py-2 md:px-3 text-center hover:text-primary rounded-lg max-md:text-sm",
               activePath === navLink.path ? "text-primary" : ""
             )}
           >
