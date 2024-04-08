@@ -26,13 +26,13 @@ export function ProfileSignout({ user }: { user: Session["user"] }) {
           className="flex flex-col items-center rounded-md"
         >
           <Image
-            className="rounded-full max-h-min h-5 w-5 md:h-10 md:w-10 border border-gray-800"
+            className="rounded-full max-h-min h-11 md:h-10 w-11 md:w-10 border border-gray-800"
             src={user?.image as string}
             alt={user?.username as string}
             width={80}
             height={80}
           />
-          <span className="md:hidden text-sm">Profile</span>
+          {/* <span className="md:hidden text-sm">Profile</span> */}
         </Link>
       )}
     </>

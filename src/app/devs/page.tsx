@@ -6,7 +6,7 @@ import { shuffle } from "@/utils/shuffle";
 
 export default async function Devs() {
   const users = await getUsers();
-  const shuffledUsers = shuffle(users);
+  const shuffledUsers = await shuffle(users);
   
   return (
     <Section>
