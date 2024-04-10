@@ -68,7 +68,7 @@ model Project {
   userId        String         @db.ObjectId
   title         String?
   description   String?
-  repo          String
+  repo          String         @unique
   images        String[]
   tags          String[]
   techStacks    String[]
@@ -76,10 +76,9 @@ model Project {
   collaborators Collaborator[]
 }
 
-model Collaborator {
-  userId  String  @id @map("_id") @db.ObjectId
-  role    String
-  project Project @relation(fields: [userId], references: [id])
+type Collaborator {
+  username String
+  role     String
 }
 
 model CollaborationRequest {
