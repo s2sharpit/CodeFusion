@@ -1,7 +1,7 @@
 import { HTMLAttributes, forwardRef } from "react";
-import { cn } from "../../utils/twCSS";
+import { cn } from "@/utils/twCSS";
 
-const sectionVaraints = "my-8 max-w-6xl w-11/12 mx-auto sm:my-10";
+const sectionVaraints = "my-8 max-w-7xl w-11/12 mx-auto sm:my-10";
 
 interface SectionProps extends HTMLAttributes<HTMLDivElement> {}
 

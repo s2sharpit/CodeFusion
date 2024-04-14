@@ -2,7 +2,7 @@ import Link from "next/link";
 import Navbar from "./Navbar";
 import { auth, signIn } from "@/lib/auth";
 import { FaGithub } from "react-icons/fa6";
-import { ProfileSignout } from "../Client";
+import { ProfileSignout } from "./Client";
 
 export default async function Header() {
   const session = await auth();

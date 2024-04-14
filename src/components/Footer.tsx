@@ -3,7 +3,7 @@ import { FaLinkedin, FaGithub, FaXTwitter } from "react-icons/fa6";
 export default function Footer() {
   return (
     <footer className="border-t border-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto w-11/12">
         <div className="flex flex-col lg:flex-row justify-between py-8">
           {/* Left Half */}
           <div className="w-full lg:w-1/2 mb-8 lg:mb-0">

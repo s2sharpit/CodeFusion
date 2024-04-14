@@ -3,6 +3,7 @@ import { getUsers } from "@/lib/getData";
 import Image from "next/image";
 import Link from "next/link";
 import { shuffle } from "@/utils/shuffle";
+import { User } from "@prisma/client";
 
 export default async function Devs() {
   const users = await getUsers();
@@ -15,15 +16,22 @@ export default async function Devs() {
       </Title>
       <Wrapper variant="flex">
         {shuffledUsers.map((dev) => (
-          <Link
+          <DevCard key={dev?.username} dev={dev} />
+        ))}
+      </Wrapper>
+    </Section>
+  );
+}
+
+
+function DevCard({dev}:{dev: User}) {
+  return (
+    <Link
             href={`/${dev?.username}`}
-            key={dev?.username}
             className="p-4 border border-gray-700 hover:border-primary rounded-md"
           >
             <h1>{dev?.username}</h1>
             <p>{dev?.name}</p>
-            <p>{dev?.major}</p>
-            <p>{dev?.interests}</p>
             <Image
               className="border border-gray-800 rounded-full"
               src={dev?.image as string}
@@ -32,8 +40,5 @@ export default async function Devs() {
               height={120}
             />
           </Link>
-        ))}
-      </Wrapper>
-    </Section>
-  );
+  )
 }

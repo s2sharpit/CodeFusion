@@ -3,7 +3,7 @@ import { VariantProps, cva } from "class-variance-authority";
 import { cn } from "../../utils/twCSS";
 
 const wrapperVariants = cva(
-  "mt-16 mx-auto gap-6 gap-x-8 md:gap-x-16 justify-center ",
+  "mt-16 mx-auto gap-6 gap-x-8 md:gap-x-16 justify-center w-full",
   {
     variants: {
       variant: {

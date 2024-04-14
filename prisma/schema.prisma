@@ -49,9 +49,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   username      String    @unique
-  major         String?
   skills        String[]
-  interests     String[]
 }
 
 model VerificationToken {
