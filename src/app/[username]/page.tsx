@@ -45,37 +45,39 @@ export default async function page({
         </picture>
 
         <p className="text-center text-sm">{ghUser?.bio}</p>
-        <div className="grid place-items-center gap-2">
-          <h4 className="">Skills</h4>
-          <div className="flex flex-wrap justify-center text-xs gap-2">
-            {user.skills.map((skill) => (
-              <p
-                key={skill}
-                className="bg-zinc-900/80 border border-gray-700/50 px-2 py-0.5 rounded-full"
-              >
-                {skill}
-              </p>
-            ))}
+        {user?.skills.length > 0 && (
+          <div className="grid place-items-center gap-2">
+            <h4 className="text-white font-medium text-sm">Skills</h4>
+            <div className="flex flex-wrap justify-center text-xs gap-2">
+              {user?.skills.map((skill) => (
+                <p
+                  key={skill}
+                  className="bg-zinc-900/80 border border-gray-700/50 px-2 py-0.5 rounded-full"
+                >
+                  {skill}
+                </p>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="flex flex-row flex-wrap justify-center items-center xsm:mx-auto ">
           {ghUser?.social_accounts.map(
-              ({ provider, url, icon }: SocialAccount) => (
-                <div className="mx-4" key={provider}>
-                  <Link
-                    href={url ?? ""}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="cursor-pointer inline-flex h-10 items-center rounded-lg  font-extrabold text-[1.5rem] hover:scale-110 transition-all duration-300 ease-in-out hover:text-purple-500"
-                    aria-label={`Follow us on ${provider}`}
-                    title={`${provider}(External Link)`}
-                  >
-                    {icon}
-                  </Link>
-                </div>
-              )
-            )}
+            ({ provider, url, icon }: SocialAccount) => (
+              <div className="mx-4" key={provider}>
+                <Link
+                  href={url ?? ""}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="cursor-pointer inline-flex h-10 items-center rounded-lg  font-extrabold text-[1.5rem] hover:scale-110 transition-all duration-300 ease-in-out hover:text-purple-500"
+                  aria-label={`Follow us on ${provider}`}
+                  title={`${provider}(External Link)`}
+                >
+                  {icon}
+                </Link>
+              </div>
+            )
+          )}
         </div>
       </Wrapper>
     </Section>
