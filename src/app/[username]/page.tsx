@@ -25,7 +25,7 @@ export default async function page({
   }
 
   return (
-    <Section className="grid grid-cols-[0.7fr_1.3fr]">
+    <Section className="grid md:grid-cols-[0.7fr_1.3fr]">
       <Wrapper className="p-4 rounded-md border border-gray-800 mt-0">
         <div className="flex w-full justify-between">
           <p className="font-semibold">@{user?.username}</p>

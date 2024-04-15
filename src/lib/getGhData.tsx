@@ -5,9 +5,9 @@ import { SlGlobe } from "react-icons/sl";
 const fetchUserData = async (username: string) => {
   try {
     const session = await auth();
-    const headers = {
+    const headers: HeadersInit = session ? {
       Authorization: `token ${session?.user.accessToken}`,
-    };
+    } : {};
 
     const [userDataResponse, socialAccountsResponse] = await Promise.all([
       fetch(`https://api.github.com/users/${username}`, { headers }),
@@ -24,10 +24,11 @@ const fetchUserData = async (username: string) => {
     ]);
 
     // Append GitHub and website social accounts directly to socialAccountsData
-    const  websiteUrl = userData.blog.startsWith("https://") ? userData.blog : `https://${userData.blog}`;
+    const websiteUrl = userData.blog.startsWith("https://") ? userData.blog : `https://${userData.blog}`;
+
     socialAccountsData.push(
       { provider: "github", url: `https://github.com/${username}` },
-      { provider: "website", url: websiteUrl }
+      ...(userData.blog ? [{ provider: "website", url: websiteUrl }] : [])
     );
 
     return { userData, socialAccountsData };
