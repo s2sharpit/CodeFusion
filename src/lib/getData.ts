@@ -7,7 +7,7 @@ export const getUsers = unstable_cache(
       return await prisma.user.findMany();
     } catch (error) {
       console.error("Error fetching users:", error);
-      return []
+      // return []
       throw error; // Re-throwing the error to maintain consistency in error handling
     }
   },

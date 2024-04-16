@@ -1,6 +1,7 @@
+import ProjectsList from "@/components/ProjectsList";
 import { Section, Wrapper } from "@/components/ui";
 import Subtle from "@/components/ui/Subtle";
-import { getProjects, getUsers } from "@/lib/getData";
+import { getUsers } from "@/lib/getData";
 import { getGhUser } from "@/lib/getGhData";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,20 +13,18 @@ export default async function page({
 }: {
   params: { username: string };
 }) {
-  const [user, projects, ghUser] = await Promise.all([
-    getUsers().then((users) =>
-      users.find((dev) => dev.username === params.username)
-    ),
-    getProjects(),
-    getGhUser(params?.username),
-  ]);
+  const users = await getUsers();
+  const ghUser = await getGhUser(params?.username);
+
+  const user = users.find((dev) => dev.username === params.username);
 
   if (!user) {
     notFound();
   }
 
   return (
-    <Section className="grid md:grid-cols-[0.7fr_1.3fr]">
+    <Section className="grid md:grid-cols-[0.8fr_1.3fr] gap-4 md:gap-6">
+      {/* DevCard */}
       <Wrapper className="p-4 rounded-md border border-gray-800 mt-0">
         <div className="flex w-full justify-between">
           <p className="font-semibold">@{user?.username}</p>
@@ -80,6 +79,8 @@ export default async function page({
           )}
         </div>
       </Wrapper>
+      {/* ProjectsList of developer */}
+      <ProjectsList username={params?.username} />
     </Section>
   );
 }

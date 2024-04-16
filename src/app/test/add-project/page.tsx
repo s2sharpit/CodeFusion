@@ -7,16 +7,16 @@ export default async function page() {
     'use server'
     await addProject({
       userId: session?.user.id as string,
-      title: "new project",
-      description: "new project description",
-      repo: "https://github.com/username/repo",
-      images: ["https://via.placeholder.com/150"],
+      title: "ARB Bookings",
+      description: "Project description of the project ARB Bookings goes here. This is a placeholder for now.",
+      repo: "https://github.com/s2shar/ARBbookings",
+      images: ["https://s2sharpit.me/dp"],
       tags: ["tag1", "tag2"],
       techStacks: ["tech1", "tech2"],
-      likes: ["user1", "user2"],
+      likes: ["s2shar", "s2sharpit"],
       collaborators: [
-        { username: "user3", role: "frontend" },
-        { username: "user4", role: "backend" },
+        { username: "s2shar", role: "frontend" },
+        { username: "s2sharpit", role: "backend" },
       ],
     });
   };
