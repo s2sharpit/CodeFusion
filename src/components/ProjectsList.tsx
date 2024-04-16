@@ -27,7 +27,7 @@ export default async function ProjectsList({ username }: { username: string }) {
             </p>
             <Link
               href={project.repo}
-              target="_blank"
+              // target="_blank"
               rel="noreferrer"
               className="absolute top-[-.5rem] right-[-.2rem]"
             >

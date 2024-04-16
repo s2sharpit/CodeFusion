@@ -6,10 +6,10 @@ export default async function page() {
   const send = async () => {
     'use server'
     await addProject({
-      userId: session?.user.id as string,
+      username: session?.user.username as string,
       title: "ARB Bookings",
       description: "Project description of the project ARB Bookings goes here. This is a placeholder for now.",
-      repo: "https://github.com/s2shar/ARBbookings",
+      repo: "s2shar/ARBbookings",
       images: ["https://s2sharpit.me/dp"],
       tags: ["tag1", "tag2"],
       techStacks: ["tech1", "tech2"],

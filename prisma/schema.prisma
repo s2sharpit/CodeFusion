@@ -50,6 +50,7 @@ model User {
   sessions      Session[]
   username      String    @unique
   skills        String[]
+  projects       Project[]
 }
 
 model VerificationToken {
@@ -63,7 +64,8 @@ model VerificationToken {
 
 model Project {
   id            String         @id @default(auto()) @map("_id") @db.ObjectId
-  userId        String         @db.ObjectId
+  username      String
+  owner         User           @relation(fields: [username], references: [username])
   title         String?
   description   String?
   repo          String         @unique

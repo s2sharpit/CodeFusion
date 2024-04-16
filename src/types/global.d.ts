@@ -1,5 +1,5 @@
 declare type Project = {
-    userId: string;
+    username: string;
     title: string;
     description: string;
     repo: string;
