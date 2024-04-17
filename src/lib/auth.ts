@@ -41,13 +41,10 @@ export const {
       }
 
       if (profile) {
-        const { login: username, bio, location, twitter_username } = profile;
+        const { login: username } = profile;
         token.user = {
           ...(token.user as Session["user"]),
           username,
-          bio,
-          location,
-          twitter_username,
         };
       }
 

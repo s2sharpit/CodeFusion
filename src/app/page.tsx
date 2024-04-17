@@ -14,9 +14,8 @@ export default async function Home() {
           width={200}
           height={200}
         />
-        <h1>{session?.user.username}</h1>
+        <h1>@{session?.user.username}</h1>
         <p>{session?.user.name}</p>
-        <p>{session?.user.location}</p>
       </div>
     </main>
   );

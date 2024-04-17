@@ -12,7 +12,7 @@ const Navbar = forwardRef<HTMLDivElement, DivProps>(
     const activePath = usePathname();
     return (
       <div
-        className={cn("flex items-center gap-5", className)}
+        className={cn("flex items-center gap-5 z-10", className)}
         ref={ref}
         {...props}
       >

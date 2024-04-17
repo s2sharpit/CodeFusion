@@ -25,7 +25,7 @@ export default async function page({
   return (
     <Section className="grid md:grid-cols-[0.8fr_1.3fr] gap-4 md:gap-6">
       {/* DevCard */}
-      <Wrapper className="p-4 rounded-md border border-gray-800 mt-0">
+      <Wrapper className="p-4 rounded-md border border-gray-800 mt-0 md:sticky md:h-min md:top-28">
         <div className="flex w-full justify-between">
           <p className="font-semibold">@{user?.username}</p>
           <Link href="/" className="text-2xl">

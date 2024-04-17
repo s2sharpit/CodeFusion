@@ -11,6 +11,10 @@
   border-radius: 10px;
 }
 
+.overflow-x-auto::-webkit-scrollbar {
+  display: none;
+}
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

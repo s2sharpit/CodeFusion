@@ -7,7 +7,7 @@ import { User } from "@prisma/client";
 
 export default async function Devs() {
   const users = await getUsers();
-  const shuffledUsers = await shuffle(users);
+  const shuffledUsers: User[] = await shuffle(users);
   
   return (
     <Section>

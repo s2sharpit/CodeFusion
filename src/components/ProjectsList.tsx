@@ -12,7 +12,7 @@ export default async function ProjectsList({ username }: { username: string }) {
   );
 
   return (
-    <Wrapper className="place-items-start mt-0 gap-4 md:gap-0 overflow-y-scrol">
+    <Wrapper className="place-items-start mt-0">
       {userProjects.map((project) => (
         <div
           key={project.id}
