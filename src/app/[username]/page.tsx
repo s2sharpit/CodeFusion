@@ -43,7 +43,7 @@ export default async function page({
           <Subtle size={"sm"}>{user?.name}</Subtle>
         </picture>
 
-        <p className="text-center text-sm">{ghUser?.bio}</p>
+        <p className="text-center text-pretty text-sm">{ghUser?.bio}</p>
         {user?.skills.length > 0 && (
           <div className="grid place-items-center gap-2">
             <h4 className="text-white font-medium text-sm">Skills</h4>

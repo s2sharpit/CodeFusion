@@ -29,7 +29,7 @@ export default async function ProjectsList({ username }: { username: string }) {
               {project?.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="bg-zinc-900/80 border border-gray-700/50 px-2 py-0.5 rounded-full"
+                  className="bg-zinc-900/80 border border-gray-700/50 px-2 py-0.5 rounded-full text-nowrap"
                 >
                   {tag}
                 </span>
@@ -47,14 +47,9 @@ export default async function ProjectsList({ username }: { username: string }) {
             </Link>
           </div>
           <div className="flex flex-row items-center m-4 mb-0 gap-4">
-            <div className="flex flex-wrap gap-2">
-              {project.techStacks.map((tag, i) => (
-                <span
-                  className={`text-xs font-semibold inline-block py-1 px-2 .uppercase rounded-full uppercase mr-2 `}
-                  key={i}
-                >
-                  {tag}
-                </span>
+            <div className="flex gap-x-4 uppercase text-xs font-bold overflow-x-auto text-nowrap">
+              {project?.techStacks.map((tech) => (
+                <span key={tech}>{tech}</span>
               ))}
             </div>
           </div>
