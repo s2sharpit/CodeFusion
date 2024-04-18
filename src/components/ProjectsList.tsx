@@ -19,12 +19,22 @@ export default async function ProjectsList({ username }: { username: string }) {
           className="rounded-lg w-full p-4 text-white hover:border-primary border border-gray-800"
         >
           <div className=" border-b border-gray-600 p-4 relative">
-            <p className="capitalize text-lg/5 font-bold basis-full line-clamp-1">
+            <h3 className="capitalize text-lg/5 font-bold basis-full line-clamp-1">
               {project.title}
-            </p>
-            <p className="pr-2 text-[.9rem] my-4 xsm:mx-0 mr-4">
+            </h3>
+            <p className="pr-2 text-[.9rem] my-2 xsm:mx-0 mr-4 line-clamp-2">
               {project.description}
             </p>
+            <div className="flex gap-x-2 capitalize text-xs overflow-x-auto pt-2">
+              {project?.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="bg-zinc-900/80 border border-gray-700/50 px-2 py-0.5 rounded-full"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
             <Link
               href={project.repo}
               // target="_blank"
@@ -36,15 +46,15 @@ export default async function ProjectsList({ username }: { username: string }) {
               </div>
             </Link>
           </div>
-          <div className="flex flex-row items-center m-4 gap-4">
+          <div className="flex flex-row items-center m-4 mb-0 gap-4">
             <div className="flex flex-wrap gap-2">
               {project.techStacks.map((tag, i) => (
-                <p
+                <span
                   className={`text-xs font-semibold inline-block py-1 px-2 .uppercase rounded-full uppercase mr-2 `}
                   key={i}
                 >
                   {tag}
-                </p>
+                </span>
               ))}
             </div>
           </div>
