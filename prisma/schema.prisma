@@ -50,7 +50,7 @@ model User {
   sessions      Session[]
   username      String    @unique
   skills        String[]
-  projects       Project[]
+  projects      Project[]
 }
 
 model VerificationToken {
