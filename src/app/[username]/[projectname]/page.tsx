@@ -50,7 +50,7 @@ export default async function page({
           >
             <Image
               src={`https://github.com/${collab.username}.png`}
-              alt={project.username}
+              alt={collab.username}
               width={52}
               height={52}
               className="rounded-full border border-gray-800"
