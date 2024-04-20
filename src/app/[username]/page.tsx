@@ -1,8 +1,8 @@
 import ProjectsList from "@/components/ProjectsList";
-import { DevLoading, ProjectListLoading } from "@/components/suspense";
+import { DevLoading, ProjectsLoading } from "@/components/suspense";
 import { Section, Wrapper } from "@/components/ui";
 import Subtle from "@/components/ui/Subtle";
-import { getUsers } from "@/lib/getData";
+import { getProjects, getUsers } from "@/lib/getData";
 import { getGhUser } from "@/lib/getGhData";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,15 +12,26 @@ import { MdCopyAll } from "react-icons/md";
 
 export default function page({ params }: { params: { username: string } }) {
   return (
-    <Section className="grid md:grid-cols-[0.8fr_1.3fr] gap-4 md:gap-6">
+    <Section className="grid md:grid-cols-[0.8fr_1.3fr] gap-6 @container/dev">
       <Suspense fallback={<DevLoading />}>
         <DevCard paramsUser={params?.username} />
       </Suspense>
-      <Suspense fallback={<ProjectListLoading />}>
-        <ProjectsList username={params?.username} />
+      <Suspense fallback={<ProjectsLoading />}>
+        <DevProjects paramsUser={params?.username} />
       </Suspense>
     </Section>
   );
+}
+
+async function DevProjects({ paramsUser }: { paramsUser: string }) {
+  const projects = await getProjects();
+  const devProjects = projects.filter((project) =>
+    project.collaborators.some(
+      (collaborator) => collaborator.username === paramsUser
+    )
+  );
+
+  return <ProjectsList projects={devProjects} />;
 }
 
 async function DevCard({ paramsUser }: { paramsUser: string }) {

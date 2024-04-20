@@ -11,8 +11,10 @@
   "dependencies": {
     "@auth/prisma-adapter": "^2.0.0",
     "@prisma/client": "^5.12.1",
+    "@tailwindcss/container-queries": "^0.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "lucide-react": "^0.372.0",
     "next": "14.2.2",
     "next-auth": "5.0.0-beta.16",
     "react": "^18.2.0",
