@@ -20,21 +20,21 @@ export default async function page({ params }: { params: { username: string } })
       <Suspense fallback={<DevLoading />}>
         <DevCard paramsUser={params?.username} />
       </Suspense>
-      <Wrapper className="mt-0">
-        {session?.user?.username === params?.username && (
-          <div className="flex justify-end w-full -mb-3">
-            <Link
-              href="/add-project"
-              className={cn(buttonVariants(), "font-semibold")}
-            >
-              Add Project
-            </Link>
-          </div>
-        )}
-        <Suspense fallback={<ProjectsLoading />}>
+      <Suspense fallback={<ProjectsLoading />}>
+        <Wrapper className="mt-0">
+          {session?.user?.username === params?.username && (
+            <div className="flex justify-end w-full -mb-3">
+              <Link
+                href="/add-project"
+                className={cn(buttonVariants(), "font-semibold")}
+              >
+                Add Project
+              </Link>
+            </div>
+          )}
           <DevProjects paramsUser={params?.username} />
-        </Suspense>
-      </Wrapper>
+        </Wrapper>
+      </Suspense>
     </Section>
   );
 }
