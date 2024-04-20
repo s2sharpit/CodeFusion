@@ -3,22 +3,38 @@ import { DevLoading, ProjectsLoading } from "@/components/suspense";
 import { Section, Wrapper } from "@/components/ui";
 import Subtle from "@/components/ui/Subtle";
 import { getProjects, getUsers } from "@/lib/getData";
+import { auth } from "@/lib/auth";
 import { getGhUser } from "@/lib/getGhData";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { MdCopyAll } from "react-icons/md";
+import { cn } from "@/utils/twCSS";
+import { buttonVariants } from "@/components/ui/Button";
 
-export default function page({ params }: { params: { username: string } }) {
+export default async function page({ params }: { params: { username: string } }) {
+  const session = await auth();
   return (
     <Section className="grid md:grid-cols-[0.8fr_1.3fr] gap-6 @container/dev">
       <Suspense fallback={<DevLoading />}>
         <DevCard paramsUser={params?.username} />
       </Suspense>
-      <Suspense fallback={<ProjectsLoading />}>
-        <DevProjects paramsUser={params?.username} />
-      </Suspense>
+      <Wrapper className="mt-0">
+        {session?.user?.username === params?.username && (
+          <div className="flex justify-end w-full -mb-3">
+            <Link
+              href="/add-project"
+              className={cn(buttonVariants(), "font-semibold")}
+            >
+              Add Project
+            </Link>
+          </div>
+        )}
+        <Suspense fallback={<ProjectsLoading />}>
+          <DevProjects paramsUser={params?.username} />
+        </Suspense>
+      </Wrapper>
     </Section>
   );
 }
