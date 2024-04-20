@@ -1,5 +1,4 @@
 import { Wrapper } from "@/components/ui";
-import { cn } from "@/utils/twCSS";
 import { Project } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
