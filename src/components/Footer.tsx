@@ -1,57 +1,69 @@
-import React from 'react';
-import { FaGithub } from 'react-icons/fa';
+import { cn } from "@/utils/twCSS";
+import Link from "next/link";
+import React from "react";
+import { FaGithub } from "react-icons/fa";
+import { buttonVariants } from "@/components/ui/Button";
+import { Subtle } from "./ui";
+import Image from "next/image";
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-800">
-      <div className="max-w-7xl mx-auto w-11/12">
-        <div className="flex flex-col lg:flex-row justify-between py-8">
-          {/* Left Half */}
-          <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
-            <span className="font-bold text-2xl items-center flex"> Code<span className="text-primary">Fusion</span></span>
-            <p className="mt-4 text-center lg:text-left text-gray-200 dark:text-gray-400">
-              Empowering college students with seamless project uploads, collaboration tools, and social integration for academic and professional excellence.
-            </p>
-          </div>
+    <footer className="border-t border-gray-800 py-8">
+      <section className="max-w-7xl mx-auto w-11/12 flex max-md:flex-col gap-8 max-md:pb-20">
+        {/* Left Half */}
+        <aside className="">
+          <Subtle className="md:text-left">
+            Code<span className="text-primary">Fusion</span>
+          </Subtle>
+          <p className="mt-4 text-center md:text-left text-pretty lg:text-balance">
+            Empowering college students with seamless project uploads,
+            collaboration tools, and social integration for academic and
+            professional excellence.
+          </p>
+        </aside>
 
-          {/* Right Half */}
-          <div className="w-full lg:w-1/2 flex justify-end mr-5">
-            <div className="float-left">
-
-              <div className='border-solid border-1 border-white shadow-lg rounded-lg p-2 text-center'>
-              <a href="#">
-                
-                <button className='bg-white  py-2 px-4 rounded-lg hover:bg-gray-700 text-black mb-2 font-medium'><FaGithub className="w-5 h-5 mr-1 inline"/>Star us✨</button>
-              </a>
-              </div>
-              <h3 className='font-bold text-center '>Developed By:</h3>
-              <br></br>
-              <div className="flex items-center mb-5 justify-center">
-                <a href="#" className="flex items-center mr-5">
-                  <div className=' rounded-full shadow-lg mr-2'>
-                    <img src="https://static-00.iconduck.com/assets.00/profile-circle-icon-2048x2048-cqe5466q.png" alt="photo" className="w-9 h-9 rounded-full" />
-                    <span>Tushar</span>
-                  </div>
-                 
-                </a>
-                <a href="#" className="flex items-center mr-5">
-                  <div className=' rounded-full shadow-lg mr-2'>
-                    <img src="https://static-00.iconduck.com/assets.00/profile-circle-icon-2048x2048-cqe5466q.png" alt="photo" className="w-9 h-9 rounded-full" />
-                    <span>Nidhi</span>
-                  </div>
-                
-                </a>
-                <a href="#" className="flex items-center">
-                  <div className=' rounded-full shadow-lg mr-2'>
-                    <img src="https://static-00.iconduck.com/assets.00/profile-circle-icon-2048x2048-cqe5466q.png" alt="photo" className="w-9 h-9 rounded-full" />
-                    <span>Sagarika</span>
-                  </div>
-                 
-                </a>
-              </div>
+        {/* Right Half */}
+        <aside className="grid place-items-center gap-8">
+          <Link
+            href="https://github.com/s2sharpit/CodeFusion"
+            target="_blank"
+            className={cn(
+              buttonVariants(),
+              "flex gap-2 font-extrabold h-14 w-fit text-[17px] "
+            )}
+          >
+            <FaGithub className="text-3xl" />
+            <span> Star us ✨</span>
+          </Link>
+          <div className="grid gap-2">
+            <h3 className="font-semibold text-center text-white ">
+              Built with ❤ by:
+            </h3>
+            <div className="flex items-center justify-center gap-6">
+              {["s2sharpit", "NidhiK26", "Sarika1510"].map((user) => (
+                <Link
+                  key={user}
+                  href={`https://github.com/${user}`}
+                  target="_blank"
+                  className="group"
+                >
+                  <figure className="grid place-items-center gap-0.5">
+                    <Image
+                      src={`https://github.com/${user}.png`}
+                      width={40}
+                      height={40}
+                      alt={user}
+                      className="rounded-full border border-gray-800"
+                    />
+                    <figcaption className="text-xs group-hover:text-white duration-150">
+                      @{user}
+                    </figcaption>
+                  </figure>
+                </Link>
+              ))}
             </div>
           </div>
-        </div>
-      </div>
+        </aside>
+      </section>
     </footer>
   );
 }
