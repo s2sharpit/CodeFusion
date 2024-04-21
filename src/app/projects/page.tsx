@@ -10,7 +10,7 @@ export default function page() {
   return (
     <Section className="@container/all">
       <Title>
-        Search for <span className="text-primary">cool</span> Projects
+        Search for <span className="text-highlight">cool</span> Projects
       </Title>
       <Suspense fallback={<ProjectsLoading />}>
         <Projects />

@@ -16,7 +16,7 @@ export default function Error({
 
   return (
     <html>
-      <body className="bg-black text-white">
+      <body className="bg-background text-primary">
         <h2>Something went wrong!</h2>
         <button onClick={() => reset()}>Try again</button>
       </body>

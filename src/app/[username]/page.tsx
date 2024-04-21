@@ -1,6 +1,6 @@
 import ProjectsList from "@/components/ProjectsList";
 import { DevLoading, ProjectsLoading } from "@/components/suspense";
-import { Section, Wrapper } from "@/components/ui";
+import { Badge, Section, Wrapper } from "@/components/ui";
 import Subtle from "@/components/ui/Subtle";
 import { getProjects, getUsers } from "@/lib/getData";
 import { auth } from "@/lib/auth";
@@ -79,9 +79,9 @@ async function DevCard({ paramsUser }: { paramsUser: string }) {
   }
 
   return (
-    <Wrapper className="p-4 rounded-md border border-gray-800 mt-0 md:sticky md:h-min md:top-28">
+    <Wrapper className="p-4 rounded-md border border-border mt-0 md:sticky md:h-min md:top-28">
       <div className="flex w-full justify-between">
-        <p className="font-semibold">@{user?.username}</p>
+        <h4 className="font-semibold">@{user?.username}</h4>
         <Link href="/" className="text-2xl">
           <MdCopyAll />
         </Link>
@@ -100,15 +100,10 @@ async function DevCard({ paramsUser }: { paramsUser: string }) {
       <p className="text-center text-pretty text-sm">{ghUser?.bio}</p>
       {user?.skills.length > 0 && (
         <div className="grid place-items-center gap-2">
-          <h4 className="text-white font-medium text-sm">Skills</h4>
+          <h4 className="text-primary font-medium text-sm">Skills</h4>
           <div className="flex flex-wrap justify-center text-xs gap-2">
             {user?.skills.map((skill) => (
-              <p
-                key={skill}
-                className="bg-zinc-900/80 border border-gray-700/50 px-2 py-0.5 rounded-full"
-              >
-                {skill}
-              </p>
+              <Badge key={skill}>{skill}</Badge>
             ))}
           </div>
         </div>

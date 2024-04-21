@@ -22,7 +22,7 @@ const Navbar = forwardRef<HTMLDivElement, DivProps>(
             href={navLink.path}
             className={cn(
               "flex flex-col items-center py-0.5 md:py-2 md:px-3 text-center hover:text-primary rounded-lg max-md:text-sm",
-              activePath === navLink.path ? "text-primary" : ""
+              activePath === navLink.path ? "text-highlight hover:text-highlight" : ""
             )}
           >
             <span className="text-xl md:hidden">{navLink.icon}</span>

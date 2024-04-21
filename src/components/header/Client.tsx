@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MdExitToApp } from "react-icons/md";
+import { Button } from "../ui";
 
 export function ProfileSignout({ user }: { user: Session["user"] }) {
   const path = usePathname();
@@ -13,20 +14,21 @@ export function ProfileSignout({ user }: { user: Session["user"] }) {
   return (
     <>
       {`/${user?.username}` === path ? (
-        <button
-          className="flex flex-col items-center pt-1 pb-0.5 md:py-2 px-3 rounded-md transition outline-dashed outline-1 outline-gray-700 hover:outline-gray-600 max-md:text-xs"
+        <Button
+          variant={"outline"}
+          className="max-md:flex-col max-md:text-xs md:gap-2 pb-0.5 pt-1 px-3 md:font-semibold border-dashed bg-transparent"
           onClick={() => signOut()}
         >
           <MdExitToApp className="text-xl md:hidden" />
           Sign out
-        </button>
+        </Button>
       ) : (
         <Link
           href={`/${user?.username}`}
           className="flex flex-col items-center rounded-md"
         >
           <Image
-            className="rounded-full max-h-min h-11 md:h-10 w-11 md:w-10 border border-gray-800"
+            className="rounded-full max-h-min h-11 md:h-10 w-11 md:w-10 border border-border"
             src={user?.image as string}
             alt={user?.username as string}
             width={80}

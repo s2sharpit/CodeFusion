@@ -11,7 +11,7 @@ export default function page() {
   return (
     <Section>
       <Title>
-        Search for <span className="text-primary">skilled</span> Developers
+        Search for <span className="text-highlight">skilled</span> Developers
       </Title>
       <Suspense fallback={<DevsLoading />}>
         <Devs />
@@ -28,17 +28,17 @@ async function Devs() {
       {users.map((dev) => (
         <div
           key={dev.username}
-          className="p-2 border border-gray-700 hover:border-primary rounded-md w-40"
+          className="p-2 border border-border hover:border-highlight rounded-md w-40"
         >
           <Link
             href={`/${dev?.username}`}
-            className="text-sm font-semibold hover:text-primary"
+            className="text-sm font-semibold hover:text-highlight"
           >
             @{dev?.username}
           </Link>
           <figure className="grid place-items-center p-2">
             <Image
-              className="border border-gray-800 rounded-full"
+              className="border border-border rounded-full"
               src={dev?.image as string}
               alt={dev?.username}
               width={120}
@@ -50,7 +50,7 @@ async function Devs() {
             {dev?.skills.map((skill) => (
               <p
                 key={skill}
-                className="bg-zinc-900/80 border border-gray-700/50 px-2 py-0.5 rounded-full"
+                className="bg-background border border-border px-2 py-0.5 rounded-full"
               >
                 {skill}
               </p>

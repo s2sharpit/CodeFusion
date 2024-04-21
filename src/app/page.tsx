@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <Section>
       <Title className="min-h-screen">
-        Code<span className="text-primary">Fusion</span>
+        Code<span className="text-highlight">Fusion</span>
       </Title>
     </Section>
   );

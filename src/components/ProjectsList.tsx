@@ -1,4 +1,4 @@
-import { Wrapper } from "@/components/ui";
+import { Badge, Wrapper } from "@/components/ui";
 import { Project } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,10 +10,10 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
       {projects.map((project) => (
         <div
           key={project.id}
-          className="rounded-lg w-full p-4 hover:border-primary border border-gray-800"
+          className="rounded-lg w-full p-4 hover:border-highlight border border-border"
         >
-          <div className=" border-b border-gray-600 @xs/dev:p-4 @xs/all:pb-2 relative">
-            <h3 className="text-white capitalize text-lg/5 font-bold basis-full line-clamp-1">
+          <div className=" border-b border-border @xs/dev:p-4 @xs/all:pb-2 relative">
+            <h3 className="text-primary capitalize text-lg/5 font-bold basis-full line-clamp-1">
               {project.title}
             </h3>
             <p className="pr-2 text-[.9rem] my-2 @xs/all:h-11 xsm:mx-0 mr-4 line-clamp-2 @xs/all:text-sm">
@@ -21,12 +21,7 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
             </p>
             <div className="flex gap-x-2 capitalize text-xs overflow-x-auto @xs/dev:pt-2">
               {project?.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="bg-zinc-900/80 border border-gray-700/50 px-2 py-0.5 rounded-full text-nowrap"
-                >
-                  {tag}
-                </span>
+                <Badge key={tag}>{tag}</Badge>
               ))}
             </div>
             <div className="absolute -top-1 @xs/all:-top-1.5 right-9 flex">
@@ -37,13 +32,13 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
                     alt={project.username}
                     width={32}
                     height={32}
-                    className="rounded-full border border-gray-800"
+                    className="rounded-full border border-border"
                   />
                 </div>
               ))}
               {project?.collaborators.length > 2 && (
                 <div className="-ml-5">
-                  <span className="rounded-full border border-gray-800 w-8 h-8 flex items-center justify-center text-white backdrop-blur-lg bg-black/50 text-sm">
+                  <span className="rounded-full border border-border w-8 h-8 flex items-center justify-center text-primary backdrop-blur-lg bg-background/50 text-sm">
                     +{project?.collaborators.length - 2}
                   </span>
                 </div>
@@ -55,7 +50,7 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
               rel="noreferrer"
               className="absolute -top-2.5 -right-1"
             >
-              <div className="inline-flex h-10 items-center rounded-lg font-extrabold text-[2rem] hover:scale-110 transition-all duration-300 ease-in-out  hover:text-primary">
+              <div className="inline-flex h-10 items-center rounded-lg font-extrabold text-[2rem] hover:scale-110 transition-all duration-300 ease-in-out  hover:text-highlight">
                 <LuExternalLink size={25} />
               </div>
             </Link>

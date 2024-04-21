@@ -7,12 +7,12 @@ import { Subtle } from "./ui";
 import Image from "next/image";
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-800 py-8">
+    <footer className="border-t border-border py-8">
       <section className="max-w-7xl mx-auto w-11/12 flex max-md:flex-col gap-8 max-md:pb-20">
         {/* Left Half */}
         <aside className="">
           <Subtle className="md:text-left">
-            Code<span className="text-primary">Fusion</span>
+            Code<span className="text-highlight">Fusion</span>
           </Subtle>
           <p className="mt-4 text-center md:text-left text-pretty lg:text-balance">
             Empowering college students with seamless project uploads,
@@ -52,9 +52,9 @@ export default function Footer() {
                       width={40}
                       height={40}
                       alt={user}
-                      className="rounded-full border border-gray-800"
+                      className="rounded-full border border-border"
                     />
-                    <figcaption className="text-xs group-hover:text-white duration-150">
+                    <figcaption className="text-xs group-hover:text-primary duration-150">
                       @{user}
                     </figcaption>
                   </figure>
