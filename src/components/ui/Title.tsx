@@ -7,7 +7,7 @@ const titleVariants = cva("text-white text-center font-bold", {
     size: {
       default: "text-3xl md:text-4xl",
       lg: "text-4xl sm:text-3xl lg:text-5xl text-left",
-      sm: "text-2xl md:text-3xl lg:text-4xl",
+      sm: "text-2xl md:text-3xl lg:text4xl",
     },
   },
   defaultVariants: {

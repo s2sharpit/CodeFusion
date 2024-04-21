@@ -20,7 +20,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="absolute top-0 left-0 right-0 bottom-0 bg-white/10 grid place-items-center z-50 text-white">
+    <div className="absolute top-0 left-0 right-0 bottom-0 bg-gray-600/20 grid place-items-center z-50 text-white">
       <dialog
         ref={dialogRef}
         className="w-4/5 max-w-4xl h-auto max-h-[36rem] border-none rounded-xl bg-black p-5 relative grid place-items-center text-white"

@@ -11,9 +11,21 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { MdCopyAll } from "react-icons/md";
 import { cn } from "@/utils/twCSS";
-import { buttonVariants } from "@/components/ui/Button";
+import { Button, buttonVariants } from "@/components/ui/Button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
-export default async function page({ params }: { params: { username: string } }) {
+export default async function page({
+  params,
+}: {
+  params: { username: string };
+}) {
   const session = await auth();
   return (
     <Section className="grid md:grid-cols-[0.8fr_1.3fr] gap-6 @container/dev">
@@ -24,12 +36,18 @@ export default async function page({ params }: { params: { username: string } })
         <Wrapper className="mt-0">
           {session?.user?.username === params?.username && (
             <div className="flex justify-end w-full -mb-3">
-              <Link
-                href="/add-project"
-                className={cn(buttonVariants(), "font-semibold")}
-              >
-                Add Project
-              </Link>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button>Add Project</Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Add New Project</DialogTitle>
+                    <DialogDescription>Description</DialogDescription>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4">Working Area</div>
+                </DialogContent>
+              </Dialog>
             </div>
           )}
           <DevProjects paramsUser={params?.username} />
