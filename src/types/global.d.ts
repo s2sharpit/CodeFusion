@@ -3,11 +3,12 @@ declare type Project = {
     title: string;
     description: string;
     repo: string;
-    images: string[];
-    tags: string[];
-    techStacks: string[];
+    // images: string[];
+    topics: string[];
+    languages: string[];
     likes: string[];
-    collaborators: { username: string; role: string }[];
+    // collaborators: { username: string; role: string }[];
+    collaborators: string[];
 }
 
 declare type UserType = {

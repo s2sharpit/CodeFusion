@@ -63,17 +63,18 @@ model VerificationToken {
 }
 
 model Project {
-  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
   username      String
-  owner         User           @relation(fields: [username], references: [username])
+  owner         User     @relation(fields: [username], references: [username])
   title         String?
   description   String?
-  repo          String         @unique
-  images        String[]
-  tags          String[]
-  techStacks    String[]
+  repo          String   @unique
+  // images        String[]
+  topics        String[]
+  languages     String[]
   likes         String[]
-  collaborators Collaborator[]
+  // collaborators Collaborator[]
+  collaborators String[]
 }
 
 type Collaborator {

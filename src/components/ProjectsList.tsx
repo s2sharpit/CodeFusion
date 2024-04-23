@@ -12,7 +12,7 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
           key={project.id}
           className="rounded-lg w-full p-4 hover:border-highlight border border-border"
         >
-          <div className=" border-b border-border @xs/dev:p-4 @xs/all:pb-2 relative">
+          <div className="border-b border-border @xs/dev:p-4 @xs/all:pb-2 relative">
             <h3 className="text-primary capitalize text-lg/5 font-bold basis-full line-clamp-1">
               {project.title}
             </h3>
@@ -20,16 +20,18 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
               {project.description}
             </p>
             <div className="flex gap-x-2 capitalize text-xs overflow-x-auto @xs/dev:pt-2">
-              {project?.tags.map((tag) => (
-                <Badge key={tag}>{tag}</Badge>
+              {project?.topics.map((topic) => (
+                <Badge variant="secondary" key={topic}>
+                  {topic}
+                </Badge>
               ))}
             </div>
             <div className="absolute -top-1 @xs/all:-top-1.5 right-9 flex">
               {project?.collaborators.slice(0, 2).map((collab, i) => (
-                <div key={collab.username} className="-ml-5">
+                <div key={collab} className="-ml-5">
                   <Image
-                    src={`https://github.com/${collab.username}.png`}
-                    alt={project.username}
+                    src={`https://github.com/${collab}.png`}
+                    alt={collab}
                     width={32}
                     height={32}
                     className="rounded-full border border-border"
@@ -57,8 +59,8 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
           </div>
           <div className="flex flex-row items-center m-4 mb-0 @xs/all:mx-0 gap-4">
             <div className="flex gap-x-4 uppercase text-xs font-bold overflow-x-auto text-nowrap">
-              {project?.techStacks.map((tech) => (
-                <span key={tech}>{tech}</span>
+              {project?.languages.map((lang) => (
+                <span key={lang}>{lang}</span>
               ))}
             </div>
           </div>

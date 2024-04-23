@@ -1,6 +1,5 @@
 import { FaGithub, FaGlobe, FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { auth } from "./auth";
-import { SlGlobe } from "react-icons/sl";
 
 const fetchUserData = async (username: string) => {
   try {

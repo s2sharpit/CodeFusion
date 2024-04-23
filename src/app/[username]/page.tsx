@@ -10,16 +10,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { MdCopyAll } from "react-icons/md";
-import { cn } from "@/utils/twCSS";
-import { Button, buttonVariants } from "@/components/ui/Button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import AddProject from "@/components/AddProject";
 
 export default async function page({
   params,
@@ -33,25 +24,10 @@ export default async function page({
         <DevCard paramsUser={params?.username} />
       </Suspense>
       <Suspense fallback={<ProjectsLoading />}>
-        <Wrapper className="mt-0">
-          {session?.user?.username === params?.username && (
-            <div className="flex justify-end w-full -mb-3">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button>Add Project</Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-md">
-                  <DialogHeader>
-                    <DialogTitle>Add New Project</DialogTitle>
-                    <DialogDescription>Description</DialogDescription>
-                  </DialogHeader>
-                  <div className="grid gap-4 py-4">Working Area</div>
-                </DialogContent>
-              </Dialog>
-            </div>
-          )}
+        <div className="flex flex-col gap-3">
+          {session?.user?.username === params?.username && <AddProject />}
           <DevProjects paramsUser={params?.username} />
-        </Wrapper>
+        </div>
       </Suspense>
     </Section>
   );
@@ -60,9 +36,7 @@ export default async function page({
 async function DevProjects({ paramsUser }: { paramsUser: string }) {
   const projects = await getProjects();
   const devProjects = projects.filter((project) =>
-    project.collaborators.some(
-      (collaborator) => collaborator.username === paramsUser
-    )
+    project.collaborators.some(collab => collab === paramsUser)
   );
 
   return <ProjectsList projects={devProjects} />;
@@ -103,7 +77,9 @@ async function DevCard({ paramsUser }: { paramsUser: string }) {
           <h4 className="text-primary font-medium text-sm">Skills</h4>
           <div className="flex flex-wrap justify-center text-xs gap-2">
             {user?.skills.map((skill) => (
-              <Badge key={skill}>{skill}</Badge>
+              <Badge variant={"secondary"} key={skill}>
+                {skill}
+              </Badge>
             ))}
           </div>
         </div>

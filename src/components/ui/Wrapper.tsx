@@ -8,7 +8,7 @@ const wrapperVariants = cva(
     variants: {
       variant: {
         default: "grid grid-cols-1 place-items-center",
-        flex: "flex flex-wrap gap-6 md:gap-8",
+        flex: "flex flex-wrap md:gap-8",
       },
     },
     defaultVariants: {
