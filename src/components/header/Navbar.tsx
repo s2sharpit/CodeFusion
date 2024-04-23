@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { navData } from "@/lib/navData";
+import { navData } from "@/data/navData";
 import { usePathname } from "next/navigation";
 import { cn } from "@/utils/twCSS";
 import { forwardRef, HTMLAttributes } from "react";
