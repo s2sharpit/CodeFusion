@@ -1,7 +1,7 @@
 import ProjectsList from "@/components/ProjectsList";
 import { ProjectsLoading } from "@/components/suspense";
 import { Section, Title } from "@/components/ui";
-import { getProjects } from "@/lib/getData";
+import { getProjects } from "@/data/getData";
 import { shuffle } from "@/utils/shuffle";
 import { Project } from "@prisma/client";
 import { Suspense } from "react";

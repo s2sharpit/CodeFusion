@@ -1,20 +1,30 @@
-import { FaGithub, FaGlobe, FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6";
-import { auth } from "./auth";
+import {
+  FaGithub,
+  FaGlobe,
+  FaInstagram,
+  FaLinkedin,
+  FaXTwitter,
+} from "react-icons/fa6";
+import { auth } from "../lib/auth";
 
 const fetchUserData = async (username: string) => {
   try {
     const session = await auth();
     const headers: HeadersInit = session ? {
-      Authorization: `token ${session?.user.accessToken}`,
-    } : {};
+          Authorization: `token ${session?.user.accessToken}`,
+        } : {};
 
     const [userDataResponse, socialAccountsResponse] = await Promise.all([
       fetch(`https://api.github.com/users/${username}`, { headers }),
-      fetch(`https://api.github.com/users/${username}/social_accounts`, { headers }),
+      fetch(`https://api.github.com/users/${username}/social_accounts`, {
+        headers,
+      }),
     ]);
 
     if (!userDataResponse.ok || !socialAccountsResponse.ok) {
-      throw new Error(`Failed to fetch data - user: ${userDataResponse.status}, social accounts: ${socialAccountsResponse.status}`);
+      throw new Error(
+        `Failed to fetch data - user: ${userDataResponse.status}, social accounts: ${socialAccountsResponse.status}`
+      );
     }
 
     const [userData, socialAccountsData] = await Promise.all([
@@ -23,7 +33,9 @@ const fetchUserData = async (username: string) => {
     ]);
 
     // Append GitHub and website social accounts directly to socialAccountsData
-    const websiteUrl = userData.blog.startsWith("https://") ? userData.blog : `https://${userData.blog}`;
+    const websiteUrl = userData.blog.startsWith("https://")
+      ? userData.blog
+      : `https://${userData.blog}`;
 
     socialAccountsData.push(
       { provider: "github", url: `https://github.com/${username}` },
@@ -43,12 +55,12 @@ const mapSocialAccounts = (socialAccounts: SocialAccount[]) => {
     x: <FaXTwitter />,
     // instagram: <FaInstagram />,
     github: <FaGithub />,
-    website: <FaGlobe /> // <SlGlobe />,
+    website: <FaGlobe />, // <SlGlobe />,
   };
 
   return socialAccounts
-    .filter(account => socialAccountsMap.hasOwnProperty(account.provider))
-    .map(account => ({
+    .filter((account) => socialAccountsMap.hasOwnProperty(account.provider))
+    .map((account) => ({
       provider: account.provider,
       url: account.url,
       icon: socialAccountsMap[account.provider],

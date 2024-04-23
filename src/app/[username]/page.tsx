@@ -2,9 +2,9 @@ import ProjectsList from "@/components/ProjectsList";
 import { DevLoading, ProjectsLoading } from "@/components/suspense";
 import { Badge, Section, Wrapper } from "@/components/ui";
 import Subtle from "@/components/ui/Subtle";
-import { getProjects, getUsers } from "@/lib/getData";
+import { getProjects, getUsers } from "@/data/getData";
 import { auth } from "@/lib/auth";
-import { getGhUser } from "@/lib/getGhData";
+import { getGhUser } from "@/data/getGhData";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -36,7 +36,7 @@ export default async function page({
 async function DevProjects({ paramsUser }: { paramsUser: string }) {
   const projects = await getProjects();
   const devProjects = projects.filter((project) =>
-    project.collaborators.some(collab => collab === paramsUser)
+    project.collaborators.some((collab) => collab === paramsUser)
   );
 
   return <ProjectsList projects={devProjects} />;

@@ -1,5 +1,5 @@
 import { Section, Title } from "@/components/ui";
-import { getProjects, getUsers } from "@/lib/getData";
+import { getProjects, getUsers } from "@/data/getData";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -32,31 +32,30 @@ export default async function page({
       </div>
       <p>{project?.description}</p>
       <div className="flex gap-4 text-sm">
-        {project?.tags.map((tag) => (
-          <span key={tag}>#{tag}</span>
+        {project?.topics.map((topic) => (
+          <span key={topic}>#{topic}</span>
         ))}
       </div>
       <div className="flex gap-4 uppercase text-xs font-bold">
-        {project?.techStacks.map((tag) => (
-          <span key={tag}>{tag}</span>
+        {project?.languages.map((lang) => (
+          <span key={lang}>{lang}</span>
         ))}
       </div>
       <div className="flex gap-4 p-4">
         {project?.collaborators.map((collab) => (
           <Link
-            href={`/${collab.username}`}
-            key={collab.username}
+            href={`/${collab}`}
+            key={collab}
             className="grid place-items-center"
           >
             <Image
-              src={`https://github.com/${collab.username}.png`}
-              alt={collab.username}
+              src={`https://github.com/${collab}.png`}
+              alt={collab}
               width={52}
               height={52}
               className="rounded-full border border-gray-800"
             />
-            <figcaption className="text-xs">@{collab.username}</figcaption>
-            <figcaption className="text-xs uppercase">{collab.role}</figcaption>
+            <figcaption className="text-xs">@{collab}</figcaption>
           </Link>
         ))}
       </div>

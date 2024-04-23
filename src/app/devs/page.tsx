@@ -1,5 +1,5 @@
 import { Section, Title, Wrapper } from "@/components/ui";
-import { getUsers } from "@/lib/getData";
+import { getUsers } from "@/data/getData";
 import Image from "next/image";
 import Link from "next/link";
 import { shuffle } from "@/utils/shuffle";

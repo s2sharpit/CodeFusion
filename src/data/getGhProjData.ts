@@ -1,4 +1,4 @@
-import { auth } from "./auth";
+import { auth } from "../lib/auth";
 
 const fetchProject = async (projectName: string, session: any) => {
   const projectFullName = `${session.user.username}/${projectName}`;
@@ -34,9 +34,10 @@ export const getGhProjData = async (proj: { title: string; repo: string }) => {
   try {
     const session = await auth();
     if (!session) throw new Error("User not authenticated");
-    
+
     const projectData = await fetchProject(proj.repo, session);
-    const { description, full_name, topics, languages, collaborators } = projectData;
+    const { description, full_name, topics, languages, collaborators } =
+      projectData;
 
     return {
       project: {

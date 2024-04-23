@@ -9,8 +9,8 @@ export async function createProjectAction(formData: FormData) {
     title: String(formData.get("title")),
     repo: String(formData.get("repo")),
   });
-  
-//   console.log(project);
+
+  //   console.log(project);
 
   await addProject(project);
   revalidateTag("projects");

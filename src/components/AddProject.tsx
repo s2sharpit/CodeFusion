@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button, Input, Label } from "@/components/ui";
 import { auth } from "@/lib/auth";
-import { createProjectAction } from "@/lib/actions";
+import { createProjectAction } from "@/data/actions";
 
 export default async function AddProject() {
   const session = await auth();
@@ -25,7 +25,11 @@ export default async function AddProject() {
           <form action={createProjectAction}>
             <DialogHeader>
               <DialogTitle>Add New Project</DialogTitle>
-              <DialogDescription>All other details will be fetched from Github.</DialogDescription>
+              <DialogDescription>
+                Ensure all project details are available on GitHub by including
+                the description, topics, and collaborators in your repository
+                before adding the project.
+              </DialogDescription>
             </DialogHeader>
             <div className="grid gap-6 py-4">
               <div className="grid gap-2.5">
