@@ -3,7 +3,6 @@ import { ProjectsLoading } from "@/components/suspense";
 import { Section, Title } from "@/components/ui";
 import { getProjects } from "@/data/getData";
 import { shuffle } from "@/utils/shuffle";
-import { Project } from "@prisma/client";
 import { Suspense } from "react";
 
 export default function page() {
@@ -20,7 +19,14 @@ export default function page() {
 }
 
 async function Projects() {
-  const projects: Project[] = await getProjects();
+  const projectsData = await getProjects();
+  // ! error using in server components, do not uncomment
+  // if (!projectsData.projects || projectsData.error) {
+  //   toast.error(projectsData.error)
+  // }
+
+  const projects = projectsData.projects;
+
   await shuffle(projects);
 
   return <ProjectsList projects={projects} />;

@@ -4,11 +4,11 @@ import prisma from "@/lib/db";
 export const getUsers = unstable_cache(
   async () => {
     try {
-      return await prisma.user.findMany();
+      const users = await prisma.user.findMany();
+      return { users }
     } catch (error) {
       console.error("Error fetching users:", error);
-      // return []
-      throw error; // Re-throwing the error to maintain consistency in error handling
+      return { users: [], error: "Server Error, Try Again!" };
     }
   },
   ["users"],
@@ -20,10 +20,11 @@ export const getUsers = unstable_cache(
 export const getProjects = unstable_cache(
   async () => {
     try {
-      return await prisma.project.findMany();
+      const projects = await prisma.project.findMany();
+      return { projects };
     } catch (error) {
       console.error("Error fetching projects:", error);
-      throw error; // Re-throwing the error to maintain consistency in error handling
+      return { projects: [], error: "Server Error, Try Again!" };
     }
   },
   ["projects"],

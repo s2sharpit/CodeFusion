@@ -3,7 +3,6 @@ import { getUsers } from "@/data/getData";
 import Image from "next/image";
 import Link from "next/link";
 import { shuffle } from "@/utils/shuffle";
-import { User } from "@prisma/client";
 import { Suspense } from "react";
 import { DevsLoading } from "@/components/suspense";
 
@@ -21,7 +20,13 @@ export default function page() {
 }
 
 async function Devs() {
-  const users: User[] = await getUsers();
+  const usersData = await getUsers();
+  // ! error using in server components, do not uncomment
+  // if (!usersData.users || usersData.error) {
+  //   toast.error(usersData.error)
+  // }
+
+  const users = usersData.users
   await shuffle(users);
   return (
     <Wrapper variant="flex">

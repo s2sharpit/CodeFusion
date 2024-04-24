@@ -11,6 +11,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { MdCopyAll } from "react-icons/md";
 import AddProject from "@/components/AddProject";
+import { toast } from "sonner";
 
 export default async function page({
   params,
@@ -34,8 +35,14 @@ export default async function page({
 }
 
 async function DevProjects({ paramsUser }: { paramsUser: string }) {
-  const projects = await getProjects();
-  const devProjects = projects.filter((project) =>
+  const projectsData = await getProjects();
+
+  // ! error using in server components, do not uncomment
+  // if (!projectsData.projects || projectsData.error) {
+  //   toast.error(projectsData.error)
+  // }
+
+  const devProjects = projectsData?.projects.filter((project) =>
     project.collaborators.some((collab) => collab === paramsUser)
   );
 
@@ -43,10 +50,15 @@ async function DevProjects({ paramsUser }: { paramsUser: string }) {
 }
 
 async function DevCard({ paramsUser }: { paramsUser: string }) {
-  const users = await getUsers();
+  const usersData = await getUsers();
   const ghUser = await getGhUser(paramsUser);
 
-  const user = users.find((dev) => dev.username === paramsUser);
+  // ! error using in server components, do not uncomment
+  // if (!usersData.users || usersData.error) {
+  //   toast.error(usersData.error)
+  // }
+
+  const user = usersData?.users.find((dev) => dev.username === paramsUser);
 
   if (!user) {
     notFound();

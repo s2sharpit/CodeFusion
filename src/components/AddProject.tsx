@@ -35,9 +35,9 @@ export default function AddProject({ session }: { session: Session }) {
             <DialogHeader>
               <DialogTitle>Add New Project</DialogTitle>
               <DialogDescription>
-                Ensure all project details are available on GitHub by including
-                the description, topics, and collaborators in your repository
-                before adding the project.
+                Before adding the project, make sure all details like
+                description, topics, and collaborators are included in your
+                public GitHub repository.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-6 py-4">

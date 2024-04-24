@@ -26,7 +26,9 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
-        <Toaster richColors />
+        <Toaster richColors toastOptions={{
+          className: 'bg-background border-border text-muted-foreground'
+        }} />
       </body>
     </html>
   );

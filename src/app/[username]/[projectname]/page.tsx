@@ -10,8 +10,13 @@ export default async function page({
 }: {
   params: { username: string; projectname: string };
 }) {
-  const projects = await getProjects();
-  const project = projects.find(
+  const projectsData = await getProjects();
+
+  // ! error using in server components, do not uncomment
+  // if (!projectsData.projects || projectsData.error) {
+  //   toast.error(projectsData.error)
+  // }
+  const project = projectsData?.projects.find(
     (project) => project.repo === `${params.username}/${params.projectname}`
   );
 

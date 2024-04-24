@@ -13,8 +13,11 @@ export async function createProjectAction(formData: FormData) {
     if (!title || !repo) return { error: "Project Title and Repo are required!"};
     const session = await auth();
 
-    const projects = await getProjects();
-    const projectExists = projects.some(
+    const projectsData = await getProjects();
+    if (!projectsData.projects || projectsData.error) {
+      return { error: projectsData.error }
+    }
+    const projectExists = projectsData?.projects.some(
       (project) => project.repo === `${session?.user.username}/${repo}`
     );
 
@@ -24,8 +27,7 @@ export async function createProjectAction(formData: FormData) {
 
     if (response?.error) return { error: String(response.error) };
 
-    const { project } = response;
-    const addProjectResponse = await addProject(project as Project);
+    const addProjectResponse = await addProject(response.project as Project);
 
     if (addProjectResponse?.error)
       return { error: String(addProjectResponse.error) };
