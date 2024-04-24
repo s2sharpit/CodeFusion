@@ -15,7 +15,7 @@ const fetchUserData = async (username: string) => {
         } : {};
 
     const [userDataResponse, socialAccountsResponse] = await Promise.all([
-      fetch(`https://api.github.com/user`, { headers }),
+      fetch(`https://api.github.com/users/${username}`, { headers }),
       fetch(`https://api.github.com/users/${username}/social_accounts`, {
         headers,
       }),

@@ -22,6 +22,7 @@ export const {
     async signIn({ user, profile }) {
       if (user && profile) {
         (user as Session["user"]).username = profile.login as string;
+        (user as Session["user"]).bio = profile.bio as string;
       }
       return true;
     },
@@ -35,8 +36,7 @@ export const {
       }
 
       if (account) {
-        (token.user as Session["user"]).accessToken =
-          account.access_token as string;
+        (token.user as Session["user"]).accessToken = account.access_token as string;
         (token.user as Session["user"]).id = user.id as string;
       }
 
@@ -44,7 +44,7 @@ export const {
         const { login: username } = profile;
         token.user = {
           ...(token.user as Session["user"]),
-          username,
+          username
         };
       }
 

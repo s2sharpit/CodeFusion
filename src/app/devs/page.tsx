@@ -1,4 +1,4 @@
-import { Section, Title, Wrapper } from "@/components/ui";
+import { Badge, Section, Subtle, Title, Wrapper } from "@/components/ui";
 import { getUsers } from "@/data/getData";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,41 +26,41 @@ async function Devs() {
   //   toast.error(usersData.error)
   // }
 
-  const users = usersData.users
+  const users = usersData.users;
   await shuffle(users);
   return (
-    <Wrapper variant="flex">
+    <Wrapper className="place-items-start md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {users.map((dev) => (
         <div
           key={dev.username}
-          className="p-2 border border-border hover:border-highlight rounded-md w-40"
+          className="rounded-lg w-full p-4 hover:border-highlight border border-border relative"
         >
-          <Link
-            href={`/${dev?.username}`}
-            className="text-sm font-semibold hover:text-highlight"
-          >
-            @{dev?.username}
-          </Link>
-          <figure className="grid place-items-center p-2">
+          <Link href={`/${dev.username}`} className="group">
+            <h3 className="text-primary capitalize text-lg/5 font-bold basis-full line-clamp-1">
+              {dev.name}
+            </h3>
+            <h4 className="text-sm group-hover:text-primary">
+              @{dev.username}
+            </h4>
+
             <Image
-              className="border border-border rounded-full"
+              className="border border-border rounded-full h-fit absolute right-3 top-2.5"
               src={dev?.image as string}
               alt={dev?.username}
-              width={120}
-              height={120}
+              width={52}
+              height={52}
             />
-            <figcaption>{dev?.name}</figcaption>
-          </figure>
-          {/* <div className="flex  justifycenter text-xs gap-2 overflow-x-auto text-nowrap">
+          </Link>
+          <p className="pr-2 text-[.9rem] my-2 h-11 xsm:mx-0 mr-4 line-clamp-2 @xs/all:text-sm">
+            {dev.bio}
+          </p>
+          <div className="flex h-6 gap-2 overflow-x-auto">
             {dev?.skills.map((skill) => (
-              <p
-                key={skill}
-                className="bg-background border border-border px-2 py-0.5 rounded-full"
-              >
+              <Badge variant="secondary" key={skill} className="h-min">
                 {skill}
-              </p>
+              </Badge>
             ))}
-          </div> */}
+          </div>
         </div>
       ))}
     </Wrapper>

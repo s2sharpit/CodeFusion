@@ -21,7 +21,7 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
                 <p className="pr-2 text-[.9rem] my-2 @xs/all:h-11 xsm:mx-0 mr-4 line-clamp-2 @xs/all:text-sm">
                   {project.description}
                 </p>
-                <div className="flex gap-x-2 capitalize text-xs overflow-x-auto @xs/dev:pt-2">
+                <div className="flex gap-x-2 capitalize overflow-x-auto @xs/dev:pt-2">
                   {project?.topics.map((topic) => (
                     <Badge variant="secondary" key={topic}>
                       {topic}

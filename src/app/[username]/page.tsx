@@ -83,11 +83,11 @@ async function DevCard({ paramsUser }: { paramsUser: string }) {
         <Subtle size={"sm"}>{user?.name}</Subtle>
       </picture>
 
-      <p className="text-center text-pretty text-sm">{ghUser?.bio}</p>
+      <p className="text-center text-pretty text-sm">{user?.bio}</p>
       {user?.skills.length > 0 && (
         <div className="grid place-items-center gap-2">
           <h4 className="text-primary font-medium text-sm">Skills</h4>
-          <div className="flex flex-wrap justify-center text-xs gap-2">
+          <div className="flex flex-wrap justify-center gap-2">
             {user?.skills.map((skill) => (
               <Badge variant={"secondary"} key={skill}>
                 {skill}
