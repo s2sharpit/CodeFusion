@@ -25,7 +25,7 @@ export default async function page({
       </Suspense>
       <Suspense fallback={<ProjectsLoading />}>
         <div className="flex flex-col gap-3">
-          {session?.user?.username === params?.username && <AddProject />}
+          {session?.user?.username === params?.username && <AddProject session={session} />}
           <DevProjects paramsUser={params?.username} />
         </div>
       </Suspense>

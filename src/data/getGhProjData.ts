@@ -13,7 +13,7 @@ const fetchProject = async (projectName: string, session: any) => {
   ]);
 
   if (![projectDataRes, languagesRes, collaboratorsRes].every((res) => res.ok)) {
-    throw new Error(`Failed to fetch data`);
+    return { error: "GitHub Repository not found or unable to fetch!" };
   }
 
   const [projectData, languagesData, collaboratorsData] = await Promise.all([
@@ -33,9 +33,12 @@ const fetchProject = async (projectName: string, session: any) => {
 export const getGhProjData = async (proj: { title: string; repo: string }) => {
   try {
     const session = await auth();
-    if (!session) throw new Error("User not authenticated");
+    if (!session) return {error: "Login before adding a project!"};
 
     const projectData = await fetchProject(proj.repo, session);
+
+    if (projectData.error) return { error: projectData.error };
+
     const { description, full_name, topics, languages, collaborators } =
       projectData;
 
@@ -52,7 +55,7 @@ export const getGhProjData = async (proj: { title: string; repo: string }) => {
       },
     };
   } catch (error) {
-    console.error(`Error fetching project data: ${error}`);
-    throw new Error(`Error fetching project data: ${error}`);
+    // console.error();
+    return {error:'Error fetching project data!'};
   }
 };
