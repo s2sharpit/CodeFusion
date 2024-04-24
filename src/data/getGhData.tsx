@@ -5,7 +5,7 @@ import {
   FaLinkedin,
   FaXTwitter,
 } from "react-icons/fa6";
-import { auth } from "../lib/auth";
+import { auth } from "@/lib/auth";
 
 const fetchUserData = async (username: string) => {
   try {
@@ -15,7 +15,7 @@ const fetchUserData = async (username: string) => {
         } : {};
 
     const [userDataResponse, socialAccountsResponse] = await Promise.all([
-      fetch(`https://api.github.com/users/${username}`, { headers }),
+      fetch(`https://api.github.com/user`, { headers }),
       fetch(`https://api.github.com/users/${username}/social_accounts`, {
         headers,
       }),

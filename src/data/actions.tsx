@@ -1,10 +1,15 @@
 "use server";
 
-import { auth } from "@/lib/auth";
+import { auth, signIn } from "@/lib/auth";
 import { getProjects } from "./getData";
 import { getGhProjData } from "./getGhProjData";
 import { addProject } from "./projects";
 import { revalidateTag } from "next/cache";
+
+export const signInAction = async () => {
+  return await signIn("github");
+};
+
 
 export async function createProjectAction(formData: FormData) {
   try {
