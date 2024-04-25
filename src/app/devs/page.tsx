@@ -33,7 +33,7 @@ async function Devs() {
       {users.map((dev) => (
         <div
           key={dev.username}
-          className="rounded-lg w-full p-4 hover:border-highlight border border-border relative"
+          className="rounded-lg w-full p-4 pb-2.5 hover:border-highlight border border-border relative"
         >
           <Link href={`/${dev.username}`} className="group">
             <h3 className="text-primary capitalize text-lg/5 font-bold basis-full line-clamp-1">
@@ -51,15 +51,16 @@ async function Devs() {
               height={52}
             />
           </Link>
-          <p className="pr-2 text-[.9rem] my-2 h-11 xsm:mx-0 mr-4 line-clamp-2 @xs/all:text-sm">
-            {dev.bio}
+          <p className="pr-2 text-[.9rem] mt-2 h-10 xsm:mx-0 mr-4 line-clamp-2 text-sm">
+            {dev.bio ? dev.bio : "Bio will be shown here..."}
           </p>
-          <div className="flex h-6 gap-2 overflow-x-auto">
-            {dev?.skills.map((skill) => (
+          <hr className="border-border my-2.5" />
+          <div className="flex h-6 gap-2 overflow-x-auto text-sm">
+            {dev.skills.length > 0 ? dev?.skills.map((skill) => (
               <Badge variant="secondary" key={skill} className="h-min">
                 {skill}
               </Badge>
-            ))}
+            )) :"Skills will be added here..."}
           </div>
         </div>
       ))}
