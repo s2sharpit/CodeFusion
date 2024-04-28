@@ -1,36 +1,65 @@
-import { Badge, Section, Subtle, Title, Wrapper } from "@/components/ui";
+import { Badge, Section, Title, Wrapper } from "@/components/ui";
 import { getUsers } from "@/data/getData";
 import Image from "next/image";
 import Link from "next/link";
 import { shuffle } from "@/utils/shuffle";
 import { Suspense } from "react";
 import { DevsLoading } from "@/components/suspense";
+import Search from "@/components/Search";
 
-export default function page() {
+type Params = {
+  search?: string;
+  filter?: string;
+};
+
+export default function Page({ searchParams }: { searchParams?: Params }) {
+  const filter = searchParams?.filter?.split(",") || [];
+
   return (
     <Section>
       <Title>
         Search for <span className="text-highlight">skilled</span> Developers
       </Title>
-      <Suspense fallback={<DevsLoading />}>
-        <Devs />
-      </Suspense>
+      <Wrapper>
+        <Search
+          placeholder="Search by name, username or skills"
+          filter={filter}
+        />
+        <Suspense fallback={<DevsLoading />}>
+          <Devs search={searchParams?.search ?? ""} filter={filter} />
+        </Suspense>
+      </Wrapper>
     </Section>
   );
 }
 
-async function Devs() {
+async function Devs({ search, filter }: { search: string; filter: string[] }) {
   const usersData = await getUsers();
-  // ! error using in server components, do not uncomment
-  // if (!usersData.users || usersData.error) {
-  //   toast.error(usersData.error)
-  // }
-
   const users = usersData.users;
+
   await shuffle(users);
+
+  const filteredUsers = users.filter((dev) => {
+    const username = dev.username.toLowerCase();
+    const name = String(dev?.name).toLowerCase();
+    const searchLower = search.toLowerCase();
+    return (
+      username.includes(searchLower) ||
+      name.includes(searchLower) ||
+      dev.skills.some((skill) => skill.toLowerCase().includes(searchLower))
+    );
+  });
+
+  const filteredBySkills =
+    filter.length === 0
+      ? filteredUsers
+      : filteredUsers.filter((dev) =>
+          dev.skills.some((skill) => filter.includes(skill))
+        );
+
   return (
-    <Wrapper className="place-items-start md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {users.map((dev) => (
+    <Wrapper className="place-items-start mt-0 md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {filteredBySkills.map((dev) => (
         <div
           key={dev.username}
           className="rounded-lg w-full p-4 pb-2.5 hover:border-highlight border border-border relative"
@@ -42,7 +71,6 @@ async function Devs() {
             <h4 className="text-sm group-hover:text-primary">
               @{dev.username}
             </h4>
-
             <Image
               className="border border-border rounded-full h-fit absolute right-3 top-2.5"
               src={dev?.image as string}
@@ -56,11 +84,15 @@ async function Devs() {
           </p>
           <hr className="border-border my-2.5" />
           <div className="flex h-6 gap-2 overflow-x-auto text-sm">
-            {dev.skills.length > 0 ? dev?.skills.map((skill) => (
-              <Badge variant="secondary" key={skill} className="h-min">
-                {skill}
-              </Badge>
-            )) :"Skills will be added here..."}
+            {dev.skills.length > 0 ? (
+              dev.skills.map((skill) => (
+                <Badge variant="secondary" key={skill} className="h-min">
+                  {skill}
+                </Badge>
+              ))
+            ) : (
+              <span>Skills will be added here...</span>
+            )}
           </div>
         </div>
       ))}
