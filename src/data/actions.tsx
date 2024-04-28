@@ -5,11 +5,25 @@ import { getProjects } from "./getData";
 import { getGhProjData } from "./getGhProjData";
 import { addProject } from "./projects";
 import { revalidateTag } from "next/cache";
+import { editUser } from "./users";
 
 export const signInAction = async () => {
   return await signIn("github");
 };
 
+
+export async function editUserAction(skills: string[]) {
+  try {
+    const editUserResponse = await editUser(skills);
+
+    if (editUserResponse?.error)
+      return { error: String(editUserResponse.error) };
+
+    revalidateTag("users");
+  } catch (error) {
+    return { error: 'Error editing user details, Try again later!' };
+  }
+}
 
 export async function createProjectAction(formData: FormData) {
   try {

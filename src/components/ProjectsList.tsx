@@ -14,14 +14,14 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
               key={project.id}
               className="rounded-lg w-full p-4 hover:border-highlight border border-border"
             >
-              <div className="border-b border-border @xs/dev:p-4 @xs/all:pb-2 relative">
+              <div className="border-b border-border @xs/dev:p-4 @xs:pb-2 relative">
                 <h3 className="text-primary capitalize text-lg/5 font-bold basis-full line-clamp-1">
                   {project.title}
                 </h3>
                 <p className="pr-2 text-[.9rem] my-2 @xs/all:h-11 xsm:mx-0 mr-4 line-clamp-2 @xs/all:text-sm">
                   {project.description}
                 </p>
-                <div className="flex gap-x-2 h-6 capitalize overflow-x-auto @xs/dev:pt-2">
+                <div className="flex gap-2 h-6 capitalize overflow-x-auto @xs/dev:mt-2.5">
                   {project?.topics.map((topic) => (
                     <Badge variant="secondary" key={topic} className="h-min">
                       {topic}
