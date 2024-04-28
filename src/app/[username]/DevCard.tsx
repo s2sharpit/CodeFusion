@@ -73,7 +73,7 @@ export default async function DevCard({
           </div>
         ) : (
           <DialogTrigger asChild>
-            <Button variant={"secondary"}>
+            <Button>
               Add Skills
             </Button>
           </DialogTrigger>

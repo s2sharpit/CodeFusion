@@ -38,6 +38,7 @@ export default function DevForm({
     let updatedSkills = [...skills];
     if (newSkill.trim() !== "") {
       updatedSkills.push(newSkill.trim());
+      setSkills([...skills, newSkill.trim()])
       setNewSkill("");
     }
 
