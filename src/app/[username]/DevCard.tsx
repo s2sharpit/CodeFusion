@@ -71,7 +71,7 @@ export default async function DevCard({
               ))}
             </div>
           </div>
-        ) : (
+        ) : isEditable && (
           <DialogTrigger asChild>
             <Button>
               Add Skills
