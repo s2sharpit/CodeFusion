@@ -68,9 +68,15 @@ export default function Footer() {
                       </AvatarFallback>
                     </Avatar>
                     <div className="space-y-1">
-                      <h4 className="text-sm font-semibold">@{user}</h4>
+                      <Link
+                        href={`https://github.com/${user}`}
+                        target="_blank"
+                        className="text-sm font-semibold cursor-pointer hover:underline underline-offset-4"
+                      >
+                        @{user}
+                      </Link>
                       <p className="text-sm">
-                        Creater and maintainer by @codefusion.
+                        Creater and maintainer of CodeFusion.
                       </p>
                     </div>
                   </div>

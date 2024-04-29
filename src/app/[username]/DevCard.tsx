@@ -48,7 +48,7 @@ export default async function DevCard({
             </Button>
           </div>
         </div>
-        <picture className="space-y-2">
+        <picture className="grid place-items-center gap-2">
           <Image
             src={user.image as string}
             alt={user.username}
