@@ -5,12 +5,23 @@ import Link from "next/link";
 import { shuffle } from "@/utils/shuffle";
 import { Suspense } from "react";
 import { DevsLoading } from "@/components/suspense";
-import Search from "@/components/Search";
+import SearchFilter from "@/components/SearchFilter";
 
 type Params = {
   search?: string;
   filter?: string;
+  filters?: string[];
 };
+
+const availableSkills = [
+  "Java",
+  "JavaScript",
+  "React",
+  "Node.js",
+  "HTML",
+  "CSS",
+  "TailwindCSS",
+];
 
 export default function Page({ searchParams }: { searchParams?: Params }) {
   const filter = searchParams?.filter?.split(",") || [];
@@ -21,28 +32,29 @@ export default function Page({ searchParams }: { searchParams?: Params }) {
         Search for <span className="text-highlight">skilled</span> Developers
       </Title>
       <Wrapper>
-        <Search
+        <SearchFilter
           placeholder="Search by name, username or skills"
           filter={filter}
+          available={availableSkills}
         />
         <Suspense fallback={<DevsLoading />}>
-          <Devs search={searchParams?.search ?? ""} filter={filter} />
+          <Devs search={searchParams?.search ?? ""} filters={filter} />
         </Suspense>
       </Wrapper>
     </Section>
   );
 }
 
-async function Devs({ search, filter }: { search: string; filter: string[] }) {
+async function Devs({ search, filters = [] }: Params) {
   const usersData = await getUsers();
   const users = usersData.users;
 
   await shuffle(users);
 
-  const filteredUsers = users.filter((dev) => {
+  const searchUsers = users.filter((dev) => {
     const username = dev.username.toLowerCase();
     const name = String(dev?.name).toLowerCase();
-    const searchLower = search.toLowerCase();
+    const searchLower = search?.toLowerCase() ?? "";
     return (
       username.includes(searchLower) ||
       name.includes(searchLower) ||
@@ -50,16 +62,16 @@ async function Devs({ search, filter }: { search: string; filter: string[] }) {
     );
   });
 
-  const filteredBySkills =
-    filter.length === 0
-      ? filteredUsers
-      : filteredUsers.filter((dev) =>
-          dev.skills.some((skill) => filter.includes(skill))
+  const filteredUsers =
+    filters.length === 0
+      ? searchUsers
+      : searchUsers.filter((dev) =>
+          dev.skills.some((skill) => filters.includes(skill.toLowerCase()))
         );
 
   return (
     <Wrapper className="place-items-start mt-0 md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {filteredBySkills.map((dev) => (
+      {filteredUsers.map((dev) => (
         <div
           key={dev.username}
           className="rounded-lg w-full p-4 pb-2.5 hover:border-highlight border border-border relative"

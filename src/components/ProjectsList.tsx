@@ -8,7 +8,7 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
   return (
     <>
       {projects.length > 0 ? (
-        <Wrapper className="place-items-start md:gap-6 @xs/dev:mt-0 @xs/all:sm:grid-cols-2 @xs/all:lg:grid-cols-3">
+        <Wrapper className="place-items-start md:gap-6 mt-0 @xs/all:sm:grid-cols-2 @xs/all:lg:grid-cols-3">
           {projects.map((project) => (
             <div
               key={project.id}
