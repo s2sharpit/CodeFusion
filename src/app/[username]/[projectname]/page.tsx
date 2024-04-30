@@ -1,21 +1,17 @@
-import { Section, Title } from "@/components/ui";
-import { getProjects, getUsers } from "@/data/getData";
+import { Badge, Section, Subtle, Title } from "@/components/ui";
+import { getProjects } from "@/data/getData";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FaGithub } from "react-icons/fa6";
 
-export default async function page({
+export default async function Page({
   params,
 }: {
   params: { username: string; projectname: string };
 }) {
   const projectsData = await getProjects();
 
-  // ! error using in server components, do not uncomment
-  // if (!projectsData.projects || projectsData.error) {
-  //   toast.error(projectsData.error)
-  // }
   const project = projectsData?.projects.find(
     (project) => project.repo === `${params.username}/${params.projectname}`
   );
@@ -23,46 +19,66 @@ export default async function page({
   if (!project) {
     notFound();
   }
+
   return (
     <Section>
-      <div className="flex justify-between">
-        <Title>{project?.title}</Title>
-        <Link
-          href={`https://github.com/${project.repo}`}
-          target="_blank"
-          className="text-3xl"
-        >
-          <FaGithub />
-        </Link>
-      </div>
-      <p>{project?.description}</p>
-      <div className="flex gap-4 text-sm">
-        {project?.topics.map((topic) => (
-          <span key={topic}>#{topic}</span>
-        ))}
-      </div>
-      <div className="flex gap-4 uppercase text-xs font-bold">
-        {project?.languages.map((lang) => (
-          <span key={lang}>{lang}</span>
-        ))}
-      </div>
-      <div className="flex gap-4 p-4">
-        {project?.collaborators.map((collab) => (
+      <div className="flex max-md:flex-col justify-between md:items-center mb-6">
+        <Title className="text-left text-2xl md:text-3xl max-md:mb-2 md:mr-6">
+          {project.title}
+        </Title>
+        <div className="">
           <Link
-            href={`/${collab}`}
-            key={collab}
-            className="grid place-items-center"
+            href={`https://github.com/${project.repo}`}
+            target="_blank"
+            className="text-3xl md:text-4xl"
           >
-            <Image
-              src={`https://github.com/${collab}.png`}
-              alt={collab}
-              width={52}
-              height={52}
-              className="rounded-full border border-gray-800"
-            />
-            <figcaption className="text-xs">@{collab}</figcaption>
+            <FaGithub />
           </Link>
-        ))}
+        </div>
+      </div>
+
+      <p className="mb-6 md:text-lg">{project?.description}</p>
+
+      <div className="mb-6">
+        <Subtle size="sm">Topics:</Subtle>
+        <div className="flex flex-wrap gap-2 mt-2">
+          {project?.topics.map((topic) => (
+            <Badge variant="secondary" key={topic}>
+              {topic}
+            </Badge>
+          ))}
+        </div>
+      </div>
+
+      <div className="mb-6">
+        <Subtle size="sm">Languages:</Subtle>
+        <div className="flex flex-wrap gap-4 mt-2 text-sm font-bold">
+          {project?.languages.map((lang) => (
+            <span key={lang}>{lang}</span>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <Subtle size="sm">Collaborators:</Subtle>
+        <div className="flex flex-wrap gap-4 mt-2">
+          {project?.collaborators.map((collab) => (
+            <Link
+              href={`/${collab}`}
+              key={collab}
+              className="flex flex-col items-center"
+            >
+              <Image
+                src={`https://github.com/${collab}.png`}
+                alt={collab}
+                width={52}
+                height={52}
+                className="rounded-full border border-gray-800"
+              />
+              <figcaption className="text-xs mt-1">@{collab}</figcaption>
+            </Link>
+          ))}
+        </div>
       </div>
     </Section>
   );

@@ -5,7 +5,7 @@ import { cn } from "@/utils/twCSS";
 const subtleVariants = cva("", {
   variants: {
     variant: {
-      default: "text-center font-bold text-primary",
+      default: "font-bold text-primary",
       special: "relative text-neutral-700 text-xl pl-14 md:pl-20 before:content-start before:absolute before:w-10 md:before:w-16 before:h-[1px] before:bg-muted-foreground before:left-0 before:top-3 md:before:top-4",
     },
     size: {
