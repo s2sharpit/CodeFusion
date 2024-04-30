@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LuPencil } from "react-icons/lu";
-import { MdCopyAll } from "react-icons/md";
+import CopyURL from "./CopyURL";
 import DevForm from "./DevForm";
 
 export default async function DevCard({
@@ -43,9 +43,7 @@ export default async function DevCard({
                 </Button>
               </DialogTrigger>
             )}
-            <Button size={"sm"} variant={"ghost"}>
-              <MdCopyAll className="text-xl" />
-            </Button>
+            <CopyURL />
           </div>
         </div>
         <picture className="grid place-items-center gap-2">
