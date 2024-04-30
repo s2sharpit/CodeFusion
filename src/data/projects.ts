@@ -12,7 +12,7 @@ export async function addProject(project: Proj) {
   }
 }
 
-export async function updateLike(project: Project) {
+export async function updateProject(project: Project) {
   try {
     const { id, ...data } = project;
     await prisma.project.update({
@@ -22,5 +22,16 @@ export async function updateLike(project: Project) {
   } catch (error) {
     console.error("Error updating project likes:", error);
     return { error: "Error updating project likes. Please try again!" };
+  }
+}
+
+export async function deleteProject(id: string) {
+  try {
+    await prisma.project.delete({
+      where: { id },
+    });
+  } catch (error) {
+    console.error("Error deleting project:", error);
+    return { error: "Error deleting project, Try again!" };
   }
 }

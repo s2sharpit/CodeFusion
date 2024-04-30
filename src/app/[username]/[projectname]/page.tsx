@@ -6,6 +6,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FaGithub } from "react-icons/fa6";
 import LikeBtn from "./LikeBtn";
+import UpdateProject from "@/components/UpdateProject";
 
 export default async function Page({
   params,
@@ -23,6 +24,8 @@ export default async function Page({
     notFound();
   }
 
+  const isEditable = session?.user.username === project.username;
+
   return (
     <Section>
       <div className="flex max-md:flex-col justify-between md:items-center mb-6">
@@ -30,6 +33,7 @@ export default async function Page({
           {project.title}
         </Title>
         <div className="flex gap-4">
+          {isEditable && <UpdateProject project={project} />}
           <LikeBtn username={session?.user.username as string} project={project} />
           <Button
             asChild

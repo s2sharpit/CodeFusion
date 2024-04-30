@@ -1,15 +1,14 @@
 import { auth } from "../lib/auth";
 
-const fetchProject = async (projectName: string, session: any) => {
-  const projectFullName = `${session.user.username}/${projectName}`;
+const fetchProject = async (repo: string, session: any) => {
   const headers: HeadersInit = {
     Authorization: `token ${session.user.accessToken}`,
   };
 
   const [projectDataRes, languagesRes, collaboratorsRes] = await Promise.all([
-    fetch(`https://api.github.com/repos/${projectFullName}`, { headers }),
-    fetch(`https://api.github.com/repos/${projectFullName}/languages`, { headers }),
-    fetch(`https://api.github.com/repos/${projectFullName}/collaborators`, { headers }),
+    fetch(`https://api.github.com/repos/${repo}`, { headers }),
+    fetch(`https://api.github.com/repos/${repo}/languages`, { headers }),
+    fetch(`https://api.github.com/repos/${repo}/collaborators`, { headers }),
   ]);
 
   if (![projectDataRes, languagesRes, collaboratorsRes].every((res) => res.ok)) {
@@ -39,15 +38,15 @@ export const getGhProjData = async (proj: { title: string; repo: string }) => {
 
     if (projectData.error) return { error: projectData.error };
 
-    const { description, full_name, topics, languages, collaborators } =
+    const { description, topics, languages, collaborators } =
       projectData;
 
     return {
       project: {
         username: session?.user.username as string,
         title: proj.title,
-        description,
-        repo: full_name,
+        description: description as string,
+        repo: proj.repo,
         topics,
         languages,
         likes: [],
