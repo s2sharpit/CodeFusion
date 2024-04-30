@@ -30,7 +30,7 @@ export default async function Page({
           {project.title}
         </Title>
         <div className="flex gap-4">
-          <LikeBtn username={String(session?.user.username)} project={project} />
+          <LikeBtn username={session?.user.username as string} project={project} />
           <Button
             asChild
             variant="link"

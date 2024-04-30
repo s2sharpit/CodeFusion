@@ -1,4 +1,3 @@
-import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
 import { Project } from "@prisma/client";
 

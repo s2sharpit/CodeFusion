@@ -12,6 +12,7 @@ export default function LikeBtn({
   username: string;
   project: Project;
 }) {
+  
   const handleLike = async () => {
     const result = await updateLikeAction(project);
 
@@ -27,7 +28,7 @@ export default function LikeBtn({
         className="text-2xl p-1 pb-0 grid gap-0 hover:text-primary"
       >
         {project.likes.includes(username) ? (
-          <FaHeart className="text-red-700" />
+          <FaHeart className="text-highlight" />
         ) : (
           <FaRegHeart />
         )}
