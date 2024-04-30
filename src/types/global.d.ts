@@ -1,4 +1,4 @@
-declare type Project = {
+declare type Proj = {
     username: string;
     title: string;
     description: string;

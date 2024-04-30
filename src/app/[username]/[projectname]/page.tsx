@@ -1,15 +1,18 @@
-import { Badge, Section, Subtle, Title } from "@/components/ui";
+import { Badge, Button, Section, Subtle, Title } from "@/components/ui";
 import { getProjects } from "@/data/getData";
+import { auth } from "@/lib/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FaGithub } from "react-icons/fa6";
+import LikeBtn from "./LikeBtn";
 
 export default async function Page({
   params,
 }: {
   params: { username: string; projectname: string };
 }) {
+  const session = await auth();
   const projectsData = await getProjects();
 
   const project = projectsData?.projects.find(
@@ -26,14 +29,18 @@ export default async function Page({
         <Title className="text-left text-2xl md:text-3xl max-md:mb-2 md:mr-6">
           {project.title}
         </Title>
-        <div className="">
-          <Link
-            href={`https://github.com/${project.repo}`}
-            target="_blank"
-            className="text-3xl md:text-4xl"
+        <div className="flex gap-4">
+          <LikeBtn username={String(session?.user.username)} project={project} />
+          <Button
+            asChild
+            variant="link"
+            size="icon"
+            className="text-4xl"
           >
-            <FaGithub />
-          </Link>
+            <Link href={`https://github.com/${project.repo}`} target="_blank">
+              <FaGithub />
+            </Link>
+          </Button>
         </div>
       </div>
 
