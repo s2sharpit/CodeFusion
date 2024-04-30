@@ -1,12 +1,12 @@
-import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
+import { User } from "@prisma/client";
 
-export async function editUser(skills: string[]) {
+export async function updateUser(user: User) {
   try {
-    const session = await auth();
+    const {id, ...data} = user;
     await prisma.user.update({
-      where: { id: session?.user.id },
-      data: { skills },
+      where: { id },
+      data,
     });
   } catch (e) {
     return { error: "Error editing user details, Try again later!" };

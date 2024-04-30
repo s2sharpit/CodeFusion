@@ -10,15 +10,17 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { LuX } from "react-icons/lu";
-import { editUserAction } from "@/data/actions";
+import { updateUserAction } from "@/data/actions";
 import { toast } from "sonner";
+import { User } from "@prisma/client";
 
 export default function DevForm({
-  skills: initialSkills,
+  user, ghUser
 }: {
-  skills: string[];
+  user: User;
+  ghUser: any
 }) {
-  const [skills, setSkills] = useState(initialSkills);
+  const [skills, setSkills] = useState(user.skills);
   const [newSkill, setNewSkill] = useState("");
 
   const handleAddSkill = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -42,7 +44,11 @@ export default function DevForm({
       setNewSkill("");
     }
 
-    const result = await editUserAction(updatedSkills);
+    user.skills = updatedSkills;
+
+    if (ghUser.bio) user.bio = ghUser.bio;
+
+    const result = await updateUserAction(user);
 
     if (result?.error) {
       return toast.error(`${result.error}`);

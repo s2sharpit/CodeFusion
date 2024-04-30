@@ -5,8 +5,8 @@ import { getProjects } from "./getData";
 import { getGhProjData } from "./getGhProjData";
 import { updateLike, addProject } from "./projects";
 import { revalidateTag } from "next/cache";
-import { editUser } from "./users";
-import { Project } from "@prisma/client";
+import { updateUser } from "./users";
+import { Project, User } from "@prisma/client";
 
 export const signInAction = async () => {
   return await signIn("github");
@@ -35,9 +35,9 @@ export async function updateLikeAction(project: Project) {
   }
 }
 
-export async function editUserAction(skills: string[]) {
+export async function updateUserAction(user: User) {
   try {
-    const editUserResponse = await editUser(skills);
+    const editUserResponse = await updateUser(user);
 
     if (editUserResponse?.error)
       return { error: String(editUserResponse.error) };

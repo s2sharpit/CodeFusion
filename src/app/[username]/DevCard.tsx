@@ -98,7 +98,7 @@ export default async function DevCard({
           )}
         </div>
 
-        <DevForm skills={user.skills} />
+        <DevForm user={user} ghUser={ghUser} />
       </Dialog>
     </Wrapper>
   );
