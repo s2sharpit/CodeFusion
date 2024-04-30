@@ -19,13 +19,15 @@ export default function LikeBtn({
     if (result?.error) {
       return toast.error(result.error);
     }
+
+    return toast.success("Like Updated Successfully!");
   };
   return (
     <form action={handleLike}>
       <button
         type="submit"
         disabled={!username}
-        className="text-2xl p-1 pb-0 grid gap-0 hover:text-primary"
+        className="text-2xl p-1 pb-0 grid gap-0 hover:text-primary active:scale-90 transition-all"
       >
         {project.likes.includes(username) ? (
           <FaHeart className="text-highlight" />
