@@ -6,6 +6,11 @@ import { shuffle } from "@/utils/shuffle";
 import { Suspense } from "react";
 import { DevsLoading } from "@/components/suspense";
 import SearchFilter from "@/components/SearchFilter";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Developers",
+};
 
 type Params = {
   search?: string;

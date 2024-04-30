@@ -8,6 +8,18 @@ import { FaGithub } from "react-icons/fa6";
 import LikeBtn from "./LikeBtn";
 import UpdateProject from "@/components/UpdateProject";
 
+type Props = {
+  params: { projectname: string, username: string };
+};
+
+export async function generateMetadata({ params }: Props) {
+  const title = params.projectname[0].toUpperCase() + params.projectname.slice(1);
+  // const user = params.username[0].toUpperCase() + params.username.slice(1);
+  return {
+    title: `${title}`,
+  };
+}
+
 export default async function Page({
   params,
 }: {

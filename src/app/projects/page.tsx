@@ -4,7 +4,13 @@ import { ProjectsLoading } from "@/components/suspense";
 import { Section, Title, Wrapper } from "@/components/ui";
 import { getProjects } from "@/data/getData";
 import { shuffle } from "@/utils/shuffle";
+import { Metadata } from "next";
 import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "Projects",
+};
+
 
 type Params = {
   search?: string;

@@ -7,6 +7,19 @@ import { Suspense } from "react";
 import AddProject from "@/components/AddProject";
 import { toast } from "sonner";
 import DevCard from "./DevCard";
+import { Metadata } from "next";
+
+type Params = {
+  params: { username: string };
+};
+
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const title = params.username[0].toUpperCase() + params.username.slice(1);
+  return {
+    title: title,
+  };
+}
+
 
 export default async function page({
   params,
