@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header/Header";
 import Footer from "@/components/Footer";
-import { Toaster, toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -90,9 +90,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
-        <Toaster richColors toastOptions={{
-          className: 'bg-background border-border text-muted-foreground'
-        }} />
+        <Toaster />
       </body>
     </html>
   );
