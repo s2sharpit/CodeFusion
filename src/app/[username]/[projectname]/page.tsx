@@ -41,7 +41,7 @@ export default async function Page({
   return (
     <Section>
       <div className="flex max-md:flex-col justify-between md:items-center mb-6">
-        <Title className="text-left text-2xl md:text-3xl max-md:mb-2 md:mr-6">
+        <Title size={'sm'} className="max-md:mb-2 md:mr-6">
           {project.title}
         </Title>
         <div className="flex gap-4">

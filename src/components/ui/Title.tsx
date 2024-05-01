@@ -2,11 +2,11 @@ import { HTMLAttributes, forwardRef } from "react";
 import { VariantProps, cva } from "class-variance-authority";
 import { cn } from "../../utils/twCSS";
 
-const titleVariants = cva("text-primary text-center font-bold", {
+const titleVariants = cva("text-primary font-bold", {
   variants: {
     size: {
-      default: "text-3xl md:text-4xl",
-      lg: "text-4xl sm:text-3xl lg:text-5xl text-left",
+      default: "text-3xl md:text-4xl text-center",
+      lg: "text-4xl sm:text-5xl lg:text-7xl",
       sm: "text-2xl md:text-3xl lg:text4xl",
     },
   },

@@ -1,64 +1,86 @@
+import { Button, Section, Subtle, Title } from "@/components/ui";
 import Link from "next/link";
-import { FaGithub, FaGlobe, FaMoneyBill } from "react-icons/fa";
-import { FaShareNodes } from "react-icons/fa6";
+import { FaGithub, FaShareAlt, FaMoneyBillAlt, FaGlobe } from "react-icons/fa";
+
+const features = [
+  {
+    name: "Add GitHub link",
+    description: "You can add your GitHub repository link to your profile.",
+    icon: FaGithub,
+  },
+  {
+    name: "Share your profile",
+    description: "Share your profile with your friends and colleagues.",
+    icon: FaShareAlt,
+  },
+  {
+    name: "Open Source",
+    description: "This project is open source and you can contribute to it.",
+    icon: FaGlobe,
+  },
+  {
+    name: "Free to use",
+    description:
+      "This project is free to use and you don't have to pay anything.",
+    icon: FaMoneyBillAlt,
+  },
+];
 
 export default function Home() {
   return (
-    <div>
-      <div className='flex'>
-        <div className='w-1/2 ml-7'>
-          <p className='text-7xl font-bold mt-20 text-white'>Explore. Create. Collab.</p> 
-          <p className="text-xl mt-10">CodeFusion is a platform where you can share your open source projects, explore and collab within the college.</p>
-          <Link href="/projects" className="outline outline-1 hover:outline-highlight rounded-sm mt-12 text-lg text-white px-4 py-2 bg-transparent hover:bg-white hover:text-gray-800 focus:outline-none focus:border-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-50 text-right">
-           Explore Projects
-          </Link>
+    <Section>
+      <section className="flex">
+        <div className="md:w-1/2 mt-6 md:mt-24 space-y-6">
+          <Title size="lg" className="font-bold text-primary">
+            Explore. Create. Collab.
+          </Title>
+          <p className="text-xl tracking-wide">
+            CodeFusion is a platform where you can share your open source
+            projects, explore and collab within the college.
+          </p>
+          <Button
+            asChild
+            variant="outline"
+            className="text-base text-primary hover:text-secondary hover:bg-primary h-12"
+          >
+            <Link href="/projects">
+              Explore Projects
+            </Link>
+          </Button>
         </div>
-        <div className='w-1/2'>
-          {/* right half  */}
+        <div className="w-1/2">{/* right half  */}</div>
+      </section>
 
+      <section className="grid place-items-center my-16 md:my-24">
+        <Title size="sm">Why should you use this?</Title>
+        <Subtle size="sm" className="text-highlight">
+          Showcase your projects
+        </Subtle>
 
+        <div className="mx-auto my-8 sm:mt-16 max-wxl lg:max-w-4xl grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-y-12">
+          {features.map((feature) => (
+            <div
+              key={feature.name}
+              className="p-5 hover:outline outline-1 outline-border rounded"
+            >
+              <div className="flex gap-6 items-start">
+                <div className="p-2 rounded-lg bg-highlight">
+                  <feature.icon
+                    className="h-6 w-6 text-primary"
+                    aria-hidden="true"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-primary">
+                    {feature.name}
+                  </h4>
+                  <p>{feature.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
-
-      <div className="flex justify-center flex-col items-center mt-10">
-        <p className="mt-10 text-3xl text-white font-bold ">Why should you use this? </p>
-        <p className="text-highlight font-bold">Showcase your projects</p>
-      </div>
-
-      <div className="flex justify-evenly mt-10">
-        <div className="hover:outline outline-1 outline-highlight rounded-lg px-4 py-4 flex items-center mt-7 w-1/3">
-          <FaGithub className="text-3xl mr-2 text-highlight" />
-          <div>
-            <span className="text-primary font-bold" style={{ display: "block" }}>Add GitHub link</span>
-            <span style={{ display: "block" }}>You can add your GitHub repository link to your profile.</span>
-          </div>
-        </div>
-        <div className="hover:outline outline-1 outline-highlight rounded-lg px-4 py-4  flex items-center mt-7 w-1/3">
-          <FaShareNodes className="text-3xl mr-2 text-highlight" />
-          <div>
-            <span className="text-primary font-bold" style={{ display: "block" }}>Share Nodes</span>
-            <span style={{ display: "block" }}>Share your profile with your friends and colleagues.</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex justify-evenly mt-10">
-        <div className="hover:outline outline-1 outline-highlight rounded-lg px-4 py-4  flex items-center mt-7 mb-10 w-1/3">
-          <FaGlobe className="text-3xl mr-2 text-highlight" />
-          <div>
-            <span className="text-primary font-bold" style={{ display: "block" }}>Web Favicon</span>
-            <span style={{ display: "block" }}>This platform is open source and you can contribute to it.</span>
-          </div>
-        </div>
-        <div className="hover:outline outline-1 outline-highlight rounded-lg px-4 py-4  flex items-center mt-7 mb-10 w-1/3">
-          <FaMoneyBill className="text-3xl mr-2 text-highlight" /> 
-          <div>
-            <span className="text-primary font-bold" style={{ display: "block" }}>Money Bill</span>
-            <span style={{ display: "block" }}>This platform is free to use and you don't have to pay anything.</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
+      </section>
+    </Section>
   );
 }
