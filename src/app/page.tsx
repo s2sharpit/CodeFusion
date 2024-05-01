@@ -1,4 +1,5 @@
 import { Button, Section, Subtle, Title } from "@/components/ui";
+import Image from "next/image";
 import Link from "next/link";
 import { FaGithub, FaShareAlt, FaMoneyBillAlt, FaGlobe } from "react-icons/fa";
 
@@ -29,9 +30,12 @@ const features = [
 export default function Home() {
   return (
     <Section>
-      <section className="flex">
-        <div className="md:w-1/2 mt-6 md:mt-24 space-y-6">
-          <Title size="lg" className="font-bold text-primary">
+      <section className="flex items-center">
+        <div className="sm:w-1/2 mt-6 md:mt-24 space-y-6">
+          <Title
+            size="lg"
+            className="leading-snug sm:leading-snug lg:leading-snug"
+          >
             Explore. Create. Collab.
           </Title>
           <p className="text-xl tracking-wide">
@@ -43,12 +47,20 @@ export default function Home() {
             variant="outline"
             className="text-base text-primary hover:text-secondary hover:bg-primary h-12"
           >
-            <Link href="/projects">
-              Explore Projects
-            </Link>
+            <Link href="/projects">Explore Projects</Link>
           </Button>
         </div>
-        <div className="w-1/2">{/* right half  */}</div>
+        <div className="max-sm:hidden w-1/2 flex justify-end pl-12 mt-12">
+          {/* right half  */}
+          <Image
+            unoptimized
+            src="/projects.gif"
+            alt="projects"
+            width={500}
+            height={450}
+            className="rounded-xl object-cover h-80"
+          />
+        </div>
       </section>
 
       <section className="grid place-items-center my-16 md:my-24">
@@ -71,9 +83,7 @@ export default function Home() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-primary">
-                    {feature.name}
-                  </h4>
+                  <h4 className="font-semibold text-primary">{feature.name}</h4>
                   <p>{feature.description}</p>
                 </div>
               </div>
