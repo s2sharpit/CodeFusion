@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL("https://codefusion.s2sharpit.me"),
   title: {
-    default: "CodeFusion - Learn. Build. Share.",
+    default: "CodeFusion - Explore. Create. Collab.",
     template: "%s - CodeFusion",
   },
   description:
@@ -20,7 +20,6 @@ export const metadata: Metadata = {
     "Open Source Projects",
     "Share Your Work",
     "Learn and Develop",
-    "ProjectHut",
     "projects",
     "educational resources",
     "wide range of products",
@@ -47,10 +46,10 @@ export const metadata: Metadata = {
   authors: [
     { name: "Tushar Saini" },
     { name: "Kumari Nidhi" },
-    { name: "Sagarika" },
+    { name: "Sagarika Kumari" },
   ],
   openGraph: {
-    title: "CodeFusion - Learn. Build. Share.",
+    title: "CodeFusion - Explore. Create. Collab",
     description:
       "A platform where you can share your open source projects within the college.",
     url: "https://codefusion.s2sharpit.me",
@@ -70,7 +69,7 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: "CodeFusion - Learn. Build. Share.",
+    title: "CodeFusion - Explore. Create. Collab.",
     card: "summary_large_image",
     description:
       "A platform where you can share your open source projects within the college.",
