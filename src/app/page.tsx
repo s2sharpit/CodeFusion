@@ -31,7 +31,7 @@ export default function Home() {
   return (
     <Section>
       <section className="flex items-center">
-        <div className="sm:w-1/2 mt-6 md:mt-24 space-y-6">
+        <div className="sm:w-1/2 mt-6 md:mt-20 space-y-6">
           <Title
             size="lg"
             className="leading-snug sm:leading-snug lg:leading-snug"
@@ -54,11 +54,11 @@ export default function Home() {
           {/* right half  */}
           <Image
             unoptimized
-            src="/projects.gif"
+            src="/giphy.gif"
             alt="projects"
             width={500}
             height={450}
-            className="rounded-xl object-cover h-80"
+            className="rounded-xl"
           />
         </div>
       </section>
