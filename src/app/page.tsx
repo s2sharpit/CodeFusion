@@ -30,8 +30,8 @@ const features = [
 export default function Home() {
   return (
     <Section>
-      <section className="flex items-center">
-        <div className="sm:w-1/2 mt-6 md:mt-20 space-y-6">
+      <section className="flex max-md:flex-col-reverse items-center gap-y-8">
+        <div className="md:w-1/2 mt-6 md:mt-20 space-y-6">
           <Title
             size="lg"
             className="leading-snug sm:leading-snug lg:leading-snug"
@@ -50,7 +50,7 @@ export default function Home() {
             <Link href="/projects">Explore Projects</Link>
           </Button>
         </div>
-        <div className="max-sm:hidden w-1/2 flex justify-end pl-12 mt-12">
+        <div className="md:w-1/2 flex justify-end md:pl-12 md:mt-12">
           {/* right half  */}
           <Image
             unoptimized
