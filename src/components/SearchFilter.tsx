@@ -1,43 +1,49 @@
-"use client"
+"use client";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FaSearch } from "react-icons/fa";
-import { Input } from "./ui";
+import { Button, Input, Subtle } from "./ui";
 import { useDebouncedCallback } from "use-debounce";
-import { LuChevronsUpDown, LuX } from "react-icons/lu";
-import { Button } from "@/components/ui";
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Checkbox } from "./ui/checkbox";
+import { LuXCircle } from "react-icons/lu";
 
-export default function SearchFilter({
-  placeholder,
-  filter,
-  available,
-}: {
-  placeholder: string;
-  filter?: string[];
-  available?:string[]
-}) {
+type Filter = {
+  category: string;
+  items: string[];
+};
+
+export default function SearchFilter({ available }: { available?: Filter[] }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-  const [skillsFilter, setSkillsFilter] = useState<string[]>(filter ?? []);
+  const [skillsFilter, setSkillsFilter] = useState<string[]>(
+    searchParams?.get("filter")?.split(",") || []
+  );
   const [searchTerm, setSearchTerm] = useState<string>(
     searchParams.get("query") || ""
   );
-  const [open, setOpen] = useState(false);
 
+  // Function to handle checkbox click
+  const handleCheckboxClick = (item: string) => {
+    // Check if the item is already in the filter
+    if (skillsFilter.includes(item)) {
+      // If yes, remove it
+      setSkillsFilter((prevFilter) =>
+        prevFilter.filter((filterItem) => filterItem !== item)
+      );
+    } else {
+      // If no, add it
+      setSkillsFilter((prevFilter) => [...prevFilter, item]);
+    }
+  };
+
+  // Debounced search handler
   const handleSearch = useDebouncedCallback(
     (term: string, skills: string[]) => {
       const params = new URLSearchParams(searchParams);
@@ -60,85 +66,67 @@ export default function SearchFilter({
     handleSearch(searchTerm, skillsFilter);
   }, [searchTerm, skillsFilter, handleSearch]);
 
-  const handleRemoveSkill = (skillToRemove: string) => {
-    const updatedSkills = skillsFilter.filter(
-      (skill) => skill !== skillToRemove
-    );
-    setSkillsFilter(updatedSkills);
-  };
-
-  const handleSelectSkill = (selectedSkill: string) => {
-    if (!skillsFilter.includes(selectedSkill)) {
-      setSkillsFilter([...skillsFilter, selectedSkill]);
-      setOpen(false);
-    }
-  };
-
   return (
-    <div className="md:flex justify-between w-full max-md:space-y-4">
-      <div className="relative h-min">
+    <div className="md:flexjustify-between w-full max-md:space-y-4">
+      <div className="flex justify-between relative">
+        <Subtle size={"sm"}>Filter Projects</Subtle>
+        {skillsFilter.length > 0 && (
+          <Button
+            size={"sm"}
+            variant="outline"
+            className="absolute right-0 bottom-0 gap-1"
+            onClick={() => setSkillsFilter([])}
+          >
+            <LuXCircle className="text-base" />
+            Clear
+          </Button>
+        )}
+      </div>
+      <div className="relative h-min my-2">
         <label htmlFor="search" className="sr-only">
           Search
         </label>
         <Input
-          className="pl-10 md:w-96 max-w-"
-          placeholder={placeholder}
+          className="pl-10 md:w-96max-w-"
+          placeholder="Search..."
           onChange={(e) => setSearchTerm(e.target.value)}
           value={searchTerm}
         />
         <FaSearch className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
       </div>
-      <div className="flex flex-wrap gap-4 justify-end">
-        {skillsFilter.map((skill) => (
-          <div
-            key={skill}
-            className="flex items-center border border-border rounded capitalize"
-          >
-            <span className=" pl-3 flex items-center gap-3">
-              {skill}
-              <button
-                type="button"
-                onClick={() => handleRemoveSkill(skill)}
-                className="px-2 py-2 h-full text-gray-500 hover:text-red-500 focus:outline-none"
-              >
-                <LuX className="text-lg" />
-              </button>
-            </span>
-          </div>
+      <hr className="border-border mt-5" />
+      <Accordion
+        type="single"
+        collapsible
+        // defaultValue={available?.[0].category}
+      >
+        {available?.map((obj) => (
+          <AccordionItem key={obj.category} value={obj.category}>
+            <AccordionTrigger>{obj.category}</AccordionTrigger>
+            <AccordionContent className="grid gap-2">
+              {obj.items.map((item) => (
+                <div
+                  key={item}
+                  className="flex items-center space-x-2 bg-secondary/50 p-2 rounded"
+                >
+                  {/* Updated Checkbox component */}
+                  <Checkbox
+                    id={item}
+                    checked={skillsFilter.includes(item.toLowerCase())}
+                    onClick={() => handleCheckboxClick(item.toLowerCase())}
+                  />
+                  <label
+                    htmlFor={item}
+                    className="textsm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    {item}
+                  </label>
+                </div>
+              ))}
+            </AccordionContent>
+          </AccordionItem>
         ))}
-        <Popover open={open} onOpenChange={setOpen}>
-          <PopoverTrigger asChild>
-            <Button
-              variant="outline"
-              role="combobox"
-              aria-expanded={open}
-              className="w-44 justify-between"
-            >
-              Filter
-              <LuChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-44 p-0">
-            <Command>
-              <CommandInput placeholder="Search Skill..."></CommandInput>
-              <CommandList>
-                <CommandEmpty>No Skill found.</CommandEmpty>
-                <CommandGroup>
-                  {available?.map((skill) => (
-                    <CommandItem
-                      key={skill}
-                      value={skill}
-                      onSelect={handleSelectSkill}
-                    >
-                      {skill}
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
-              </CommandList>
-            </Command>
-          </PopoverContent>
-        </Popover>
-      </div>
+      </Accordion>
     </div>
   );
 }
