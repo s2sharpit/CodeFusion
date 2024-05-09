@@ -3,6 +3,7 @@ import SearchFilter from "@/components/SearchFilter";
 import { ProjectsLoading } from "@/components/suspense";
 import { Section, Title, Wrapper } from "@/components/ui";
 import { getProjects } from "@/data/getData";
+import { projectsFilter } from "@/data/projectsFilter";
 import { shuffle } from "@/utils/shuffle";
 import { Metadata } from "next";
 import { Suspense } from "react";
@@ -11,22 +12,11 @@ export const metadata: Metadata = {
   title: "Projects",
 };
 
-
 type Params = {
   search?: string;
   filter?: string;
   filters?: string[];
 };
-
-const available = [
-  "Java",
-  "JavaScript",
-  "React",
-  "Node.js",
-  "HTML",
-  "CSS",
-  "TailwindCSS",
-];
 
 export default function page({ searchParams }: { searchParams?: Params }) {
   const filter = searchParams?.filter?.split(",") || [];
@@ -36,12 +26,8 @@ export default function page({ searchParams }: { searchParams?: Params }) {
       <Title>
         Search for <span className="text-highlight">cool</span> Projects
       </Title>
-      <Wrapper>
-        <SearchFilter
-          placeholder="Search by project name, owner or skills"
-          filter={filter}
-          available={available}
-        />
+      <Wrapper className="md:grid-cols-[14rem_calc(100%-17rem)] md:gap-12 place-items-start">
+        <SearchFilter available={projectsFilter} />
         <Suspense fallback={<ProjectsLoading />}>
           <Projects search={searchParams?.search ?? ""} filters={filter} />
         </Suspense>

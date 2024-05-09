@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import { DevsLoading } from "@/components/suspense";
 import SearchFilter from "@/components/SearchFilter";
 import { Metadata } from "next";
+import { devsFilter } from "@/data/devsFilter";
 
 export const metadata: Metadata = {
   title: "Developers",
@@ -36,12 +37,8 @@ export default function Page({ searchParams }: { searchParams?: Params }) {
       <Title>
         Search for <span className="text-highlight">skilled</span> Developers
       </Title>
-      <Wrapper>
-        <SearchFilter
-          placeholder="Search by name, username or skills"
-          filter={filter}
-          available={availableSkills}
-        />
+      <Wrapper className="md:grid-cols-[14rem_calc(100%-17rem)] md:gap-12 place-items-start">
+        <SearchFilter available={devsFilter} />
         <Suspense fallback={<DevsLoading />}>
           <Devs search={searchParams?.search ?? ""} filters={filter} />
         </Suspense>
