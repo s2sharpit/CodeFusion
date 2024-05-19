@@ -74,6 +74,7 @@ model Project {
   topics        String[]
   languages     String[]
   likes         String[]
+  demoVid       String?
   // collaborators Collaborator[]
   collaborators String[]
 }

@@ -64,6 +64,19 @@ export default function AddProject({ session }: { session: Session }) {
                   />
                 </div>
               </div>
+              <div className="grid gap-1">
+                <Label htmlFor="demoVid">Demo Video Youtube Link:</Label>
+                <div className="col-span- flex items-center">
+                  <span className="text-sm">youtu.be/</span>
+                  <Input
+                    name="demoVid"
+                    id="demoVid"
+                    placeholder="785iHaicd1w (only add unique identifier)"
+                    className="border-0 border-b rounded-none h-7 p-0 focus-visible:border-ring focus-visible:border-b-2 focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-muted-foreground/50"
+                    // required
+                  />
+                </div>
+              </div>
               <div className="grid gap-2.5"></div>
             </div>
             <DialogFooter>

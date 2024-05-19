@@ -60,7 +60,8 @@ export default async function Page({
       </div>
 
       <p className="mb-6 md:text-lg">{project?.description}</p>
-      <section className="md:flex gap-4 justify-between ">
+
+      <section className="flex max-md:flex-col gap-4 justify-between ">
         <section>
           <div className="mb-6">
             <Subtle size="sm">Topics:</Subtle>
@@ -104,16 +105,15 @@ export default async function Page({
             </div>
           </div>
         </section>
-        <iframe className="rounded-xl"
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/GN6ZlssqNAE"
-          title="YouTube video player"
-          
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allowFullScreen
+        {project.demoVid && 
+        <iframe className="rounded-xl h-80 w-[35rem] max-w-full"
+        src={`https://www.youtube.com/embed/${project.demoVid}`}
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
         ></iframe>
+      }
       </section>
     </Section>
   );

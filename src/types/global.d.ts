@@ -6,6 +6,7 @@ declare type Proj = {
     // images: string[];
     topics: string[];
     languages: string[];
+    demoVid: string?;
     likes: string[];
     // collaborators: { username: string; role: string }[];
     collaborators: string[];

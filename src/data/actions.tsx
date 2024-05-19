@@ -52,6 +52,7 @@ export async function createProjectAction(formData: FormData) {
   try {
     const title = String(formData.get("title"));
     const projectRepo = String(formData.get("repo"));
+    const demoVid = String(formData.get("demoVid"));
     if (!title || !projectRepo)
       return { error: "Project Title and Repo are required!" };
 
@@ -73,7 +74,7 @@ export async function createProjectAction(formData: FormData) {
 
     if (response?.error) return { error: String(response.error) };
 
-    const addProjectResponse = await addProject(response.project as Proj);
+    const addProjectResponse = await addProject({...response.project, demoVid} as Proj);
 
     if (addProjectResponse?.error)
       return { error: String(addProjectResponse.error) };
@@ -100,6 +101,7 @@ export async function updateProjectAction(project: Project) {
       id: project.id,
       title: project.title,
       likes: project.likes,
+      demoVid: project.demoVid,
       ...data,
     };
 
