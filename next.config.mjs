@@ -9,7 +9,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "s2sharpit.me",
+        hostname: "s2sharpit.dev",
       },
       {
         protocol: "https",

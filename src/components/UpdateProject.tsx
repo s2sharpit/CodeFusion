@@ -25,7 +25,8 @@ export default function UpdateProject({ project }: { project: Project }) {
 
     const result = await updateProjectAction(project);
     if (result?.error) {
-      return toast.error(`${result.error}`);
+      toast.error(`${result.error}`);
+      return;
     }
     toast.success("Project updated successfully!");
   };
@@ -34,7 +35,8 @@ export default function UpdateProject({ project }: { project: Project }) {
     const result = await deleteProjectAction(project);
 
     if (result?.error) {
-      return toast.error(`${result.error}`);
+      toast.error(`${result.error}`);
+      return;
     }
     toast.success("Project deleted successfully!");
   }

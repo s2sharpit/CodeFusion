@@ -8,7 +8,7 @@ import { Toaster } from "@/components/ui/sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://codefusion.s2sharpit.me"),
+  metadataBase: new URL("https://codefusion.s2sharpit.dev"),
   title: {
     default: "CodeFusion - Explore. Create. Collab.",
     template: "%s - CodeFusion",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     title: "CodeFusion - Explore. Create. Collab",
     description:
       "A platform where you can share your open source projects within the college.",
-    url: "https://codefusion.s2sharpit.me",
+    url: "https://codefusion.s2sharpit.dev",
     siteName: "CodeFusion",
     locale: "en-US",
     type: "website",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     description:
       "A platform where you can share your open source projects within the college.",
     images:
-      "https://codefusion.s2sharpit.me/assets/images/codefusion-social-image.png",
+      "https://codefusion.s2sharpit.dev/assets/images/codefusion-social-image.png",
   },
 };
 

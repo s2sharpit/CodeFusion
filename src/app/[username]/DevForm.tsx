@@ -51,7 +51,8 @@ export default function DevForm({
     const result = await updateUserAction(user);
 
     if (result?.error) {
-      return toast.error(`${result.error}`);
+      toast.error(`${result.error}`);
+      return;
     }
     toast.success("User details updated successfully!");
   };

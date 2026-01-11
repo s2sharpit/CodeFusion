@@ -13,14 +13,16 @@ export default function LikeBtn({
   project: Project;
 }) {
   
-  const handleLike = async () => {
+  const handleLike = async (formData: FormData) => {
     const result = await updateLikeAction(project);
 
     if (result?.error) {
-      return toast.error(result.error);
+      toast.error(result.error);
+      return;
     }
 
-    return toast.success("Like Updated Successfully!");
+    toast.success("Like Updated Successfully!");
+    return;
   };
   return (
     <form action={handleLike}>

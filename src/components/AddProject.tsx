@@ -19,7 +19,8 @@ export default function AddProject({ session }: { session: Session }) {
     const result = await createProjectAction(formData);
 
     if (result?.error) {
-      return toast.error(`${result.error}`);
+      toast.error(`${result.error}`);
+      return;
     }
     toast.success("Project added successfully!");
   }
